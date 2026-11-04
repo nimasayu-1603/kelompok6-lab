@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>InventraLab - Buat Laporan</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">IL</span><span><strong>InventraLab</strong><small>Lab Komputer 1–10</small></span></a>
+    <span class="avatar">LR</span>
+  </header>
+  <nav class="nav-bar" aria-label="Navigasi utama">
+    <a href="index.html"><span>⌂</span><small>Beranda</small></a>
+    <a href="riwayat.html"><span>◷</span><small>Riwayat</small></a>
+    <a class="active" href="laporan.html"><span>＋</span><small>Laporan</small></a>
+    <a href="dasboard.html"><span>▥</span><small>Dasbor</small></a>
+    <a href="panduan.html"><span>?</span><small>Panduan</small></a>
+    <a href="kontak.html"><span>✉</span><small>Kontak</small></a>
+  </nav>
+  <main>
+    <section class="section">
+      <div class="section-head"><div><p class="eyebrow">FORMULIR</p><h2>Buat Laporan</h2></div><span class="status">Aktif</span></div>
+      <form class="form">
+        <div class="field full"><label for="nama">Nama pelapor</label><input id="nama" type="text" placeholder="Masukkan nama"></div>
+        <div class="field"><label for="peran">Peran</label><select id="peran"><option>Pilih peran</option><option>Laboran</option><option>Kepala Jurusan</option><option>Siswa RPL</option><option>Siswa DKV</option></select></div>
+        <div class="field"><label for="lab">Lab Komputer</label><select id="lab"><option>Pilih lab</option><option>Lab Komputer 1</option><option>Lab Komputer 2</option><option>Lab Komputer 3</option><option>Lab Komputer 4</option><option>Lab Komputer 5</option><option>Lab Komputer 6</option><option>Lab Komputer 7</option><option>Lab Komputer 8</option><option>Lab Komputer 9</option><option>Lab Komputer 10</option></select></div>
+        <div class="field"><label for="kode">Kode perangkat</label><input id="kode" type="text" placeholder="Contoh: LAB-001"></div>
+        <div class="field"><label for="kondisi">Kondisi</label><select id="kondisi"><option>Baik</option><option>Perlu Perbaikan</option><option>Rusak</option><option>Hilang</option></select></div>
+        <div class="field full"><label for="catatan">Catatan</label><textarea id="catatan" placeholder="Jelaskan kerusakan atau perubahan..."></textarea></div>
+        <div class="field full"><label for="foto">Foto perangkat <span>(opsional)</span></label><input id="foto" type="file" accept="image/*"></div>
+        <div class="form-actions full"><a class="secondary-button" href="index.html">Batal</a><a class="primary-button" href="riwayat.html">Kirim Laporan</a></div>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
