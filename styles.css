@@ -1,12 +1,11 @@
 :root {
   --navy: #17324d;
   --blue: #2563eb;
-  --blue-soft: #edf4ff;
   --ink: #172033;
   --muted: #667085;
   --line: #e5eaf0;
-  --canvas: #f5f7fa;
   --white: #ffffff;
+  --bg-input: #f3f4f6;
   --green: #168a4b;
   --orange: #b7791f;
   --red: #c83b3b;
@@ -16,7 +15,7 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  background-color: var(--canvas);
+  background-color: var(--white); 
   color: var(--ink);
   padding-bottom: 70px;
   line-height: 1.4;
@@ -84,9 +83,9 @@ a { text-decoration: none; color: inherit; }
 /* --- KONTEN UTAMA --- */
 main { width: 100%; max-width: 800px; margin: 0 auto; }
 
-/* BERANDA (SATU WARNA: ABU-ABU TERANG) */
+/* BERANDA  */
 .hero {
-  background-color: var(--canvas); /* SAMA DENGAN BACKGROUND BODY */
+  background-color: transparent;
   padding: 32px 24px;
   border-bottom: 1px solid var(--line);
 }
@@ -111,13 +110,13 @@ main { width: 100%; max-width: 800px; margin: 0 auto; }
   font-weight: bold; font-size: 14px; border: 1px solid var(--line); width: 100%;
 }
 
-/* KOTAK STATISTIK (DIBIKIN PUTIH KONTRAS) */
+/* KOTAK STATISTIK */
 .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 32px; }
 .metrics article {
-  background-color: var(--white); padding: 16px 8px;
+  background-color: var(--bg-input); 
+  padding: 16px 8px;
   border-radius: 10px; text-align: center; 
   border: 1px solid var(--line);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
 }
 .metrics strong { display: block; font-size: 22px; color: var(--ink); margin-bottom: 4px; }
 .metrics span { font-size: 11px; color: var(--muted); }
@@ -127,6 +126,7 @@ main { width: 100%; max-width: 800px; margin: 0 auto; }
 .section-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
 .section-head h2 { font-size: 22px; letter-spacing: -0.5px; }
 
+/* FORM */
 .form {
   background-color: var(--white); 
   border: 1px solid var(--line);
@@ -148,7 +148,7 @@ main { width: 100%; max-width: 800px; margin: 0 auto; }
   border-radius: 8px;
   font-family: inherit; 
   font-size: 14px; 
-  background-color: var(--canvas); 
+  background-color: var(--bg-input); 
   color: var(--ink);
 }
 
@@ -209,7 +209,7 @@ main { width: 100%; max-width: 800px; margin: 0 auto; }
     border-radius: 12px; 
     border: 1px solid var(--line); 
     padding: 48px; 
-    background-color: var(--white); /* Di desktop baru dibikin putih kotak */
+    background-color: var(--bg-input); /* Di desktop dibikin kotak abu tipis */
   }
   .hero h1 { font-size: 42px; }
   .primary-button { width: auto; }
