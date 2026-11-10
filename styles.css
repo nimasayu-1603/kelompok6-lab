@@ -12,454 +12,214 @@
   --red: #c83b3b;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  background-color: var(--canvas);
+  margin: 0;
   color: var(--ink);
-  padding-bottom: 80px; /* Jarak aman agar konten tidak tertutup menu bawah */
-  line-height: 1.5;
+  background: var(--canvas);
+  font-family: Arial, sans-serif;
+  padding-bottom: 76px;
 }
+a { color: inherit; text-decoration: none; }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-/* =========================================
-   HEADER (TOPBAR)
-   ========================================= */
 .topbar {
+  height: 64px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
-  background-color: var(--white);
-  border-bottom: 1px solid var(--line);
+  justify-content: space-between;
+  padding: 0 16px;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 20;
+  background: rgba(255,255,255,.96);
+  border-bottom: 1px solid var(--line);
 }
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
+.brand { display: flex; align-items: center; gap: 9px; }
 .brand-mark {
-  background-color: var(--blue);
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
   color: var(--white);
-  font-weight: bold;
-  padding: 8px;
-  border-radius: 8px;
-  font-size: 14px;
+  background: var(--blue);
+  font-weight: 800;
 }
-
-.brand-text strong {
-  display: block;
-  font-size: 15px;
-}
-
-.brand-text small {
-  display: block;
-  font-size: 11px;
-  color: var(--muted);
-}
-
+.brand strong, .brand small { display: block; }
+.brand strong { font-size: 14px; }
+.brand small { margin-top: 2px; color: var(--muted); font-size: 10px; }
 .avatar {
-  background-color: var(--navy);
-  color: var(--white);
-  font-weight: bold;
   width: 36px;
   height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   border-radius: 50%;
-  font-size: 13px;
+  color: var(--white);
+  background: var(--navy);
+  font-size: 12px;
+  font-weight: 800;
 }
 
-/* =========================================
-   NAVIGASI BAWAH (MOBILE)
-   ========================================= */
 .nav-bar {
   position: fixed;
-  bottom: 0;
   left: 0;
   right: 0;
-  background-color: var(--white);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px 0;
+  bottom: 0;
+  z-index: 30;
+  height: 68px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  padding: 6px 8px 8px;
   border-top: 1px solid var(--line);
-  z-index: 10;
+  background: var(--white);
 }
-
 .nav-bar a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  gap: 2px;
+  border-radius: 10px;
   color: var(--muted);
   font-size: 18px;
-  padding: 6px 12px;
-  border-radius: 8px;
 }
+.nav-bar a small { font-size: 10px; font-weight: 700; }
+.nav-bar a.active { color: var(--blue); background: var(--blue-soft); }
 
-.nav-bar a small {
-  font-size: 10px;
-  font-weight: 600;
-}
+main { width: 100%; display: flex; flex-direction: column; }
+#beranda { order: 1; }
+#riwayat { order: 2; }
+#laporan { order: 3; }
+#bantuan { order: 4; }
+.section { scroll-margin-top: 76px; padding: 22px 16px 10px; }
+.hero { min-height: 420px; padding-top: 38px; background: linear-gradient(135deg, #fff 55%, #edf4ff); }
+.eyebrow { margin: 0 0 8px; color: var(--blue); font-size: 10px; font-weight: 800; letter-spacing: 1px; }
+.hero h1 { margin: 0; font-size: 34px; line-height: 1.12; letter-spacing: -1px; }
+.hero h1 span { color: var(--blue); }
+.lead { margin: 14px 0 20px; color: var(--muted); line-height: 1.55; font-size: 14px; }
 
-.nav-bar a.active {
-  color: var(--blue);
-  background-color: var(--blue-soft);
-}
-
-/* =========================================
-   WADAH UTAMA
-   ========================================= */
-main {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.section {
-  padding: 24px 16px;
-}
-
-/* =========================================
-   BERANDA (HERO)
-   ========================================= */
-.hero {
-  background: linear-gradient(180deg, #ffffff 0%, var(--blue-soft) 100%);
-  padding: 32px 24px;
-  border-bottom: 1px solid var(--line);
-}
-
-.eyebrow {
-  color: var(--blue);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-  text-transform: uppercase;
-}
-
-.hero h1 {
-  font-size: 32px;
-  line-height: 1.2;
-  margin-bottom: 16px;
-  letter-spacing: -0.5px;
-}
-
-.hero h1 span {
-  color: var(--blue);
-}
-
-.lead {
-  color: var(--muted);
-  font-size: 15px;
-  margin-bottom: 24px;
-}
-
-/* =========================================
-   TOMBOL
-   ========================================= */
-.primary-button {
-  display: inline-block;
-  background-color: var(--blue);
-  color: var(--white);
-  padding: 14px 24px;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 14px;
-  text-align: center;
-  width: 100%;
-  margin-bottom: 32px;
-}
-
-.secondary-button {
-  display: inline-block;
-  background-color: var(--white);
-  color: var(--ink);
-  padding: 14px 24px;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 14px;
-  border: 1px solid var(--line);
-  text-align: center;
-  width: 100%;
-}
-
-/* =========================================
-   KOTAK STATISTIK
-   ========================================= */
-.metrics {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-}
-
-.metrics article {
-  background-color: var(--white);
-  padding: 16px 8px;
-  border-radius: 12px;
-  text-align: center;
-  border: 1px solid var(--line);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-}
-
-.metrics strong {
-  display: block;
-  font-size: 24px;
-  color: var(--ink);
-  margin-bottom: 4px;
-}
-
-.metrics span {
-  font-size: 11px;
-  color: var(--muted);
-}
-
-/* =========================================
-   JUDUL SECTION
-   ========================================= */
-.section-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.section-head h2 {
-  font-size: 22px;
-  letter-spacing: -0.5px;
-}
-
-/* =========================================
-   FORM LAPORAN
-   ========================================= */
-.form {
-  background-color: var(--white);
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid var(--line);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.field label {
-  font-size: 13px;
-  font-weight: bold;
-}
-
-.field label span {
-  color: var(--muted);
-  font-weight: normal;
-}
-
-.field input, .field select, .field textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  font-family: inherit;
-  font-size: 14px;
-  background-color: var(--canvas);
-}
-
-.field textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-
-.field input:focus, .field select:focus, .field textarea:focus {
-  outline: none;
-  border-color: var(--blue);
-  background-color: var(--white);
-}
-
-.form-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 10px;
-}
-
-/* =========================================
-   RIWAYAT
-   ========================================= */
-.history-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.history-item {
-  background-color: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  display: flex;
+.primary-button, .secondary-button {
+  min-height: 46px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
-  font-size: 18px;
-  flex-shrink: 0;
+  border-radius: 9px;
+  padding: 0 16px;
+  font-size: 13px;
+  font-weight: 800;
 }
+.primary-button { color: var(--white); background: var(--blue); }
+.secondary-button { border: 1px solid var(--line); background: var(--white); }
 
-.icon.good { background-color: #e9f7ef; color: var(--green); }
-.icon.warning { background-color: #fff4df; color: var(--orange); }
-.icon.danger { background-color: #fdeaea; color: var(--red); }
+.metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 28px; }
+.metrics article { min-width: 0; padding: 12px 8px; border: 1px solid var(--line); border-radius: 10px; background: var(--white); }
+.metrics strong, .metrics span { display: block; }
+.metrics strong { font-size: 21px; }
+.metrics span { margin-top: 4px; color: var(--muted); font-size: 9px; line-height: 1.2; }
 
-.history-text {
-  flex: 1;
+.section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.section-head h2 { margin: 0; font-size: 22px; }
+.status, .badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  border-radius: 999px;
+  padding: 0 9px;
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--green);
+  background: #e9f7ef;
 }
+.text-button { color: var(--blue); font-size: 12px; font-weight: 800; }
 
-.history-text strong {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 4px;
-}
-
-.history-text small {
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.badge {
-  padding: 4px 10px;
-  border-radius: 99px;
-  font-size: 11px;
-  font-weight: bold;
-}
-.badge.good { background-color: #e9f7ef; color: var(--green); }
-.badge.warning { background-color: #fff4df; color: var(--orange); }
-.badge.danger { background-color: #fdeaea; color: var(--red); }
-
-/* =========================================
-   KARTU INFORMASI (PANDUAN/KONTAK)
-   ========================================= */
-.help-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.info-card {
-  background-color: var(--white);
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 16px;
   border: 1px solid var(--line);
   border-radius: 12px;
-  padding: 20px;
+  background: var(--white);
 }
-
-.info-card h3 {
-  font-size: 16px;
-  margin-bottom: 12px;
+.field { display: grid; gap: 6px; }
+.field.full, .form-actions.full { grid-column: 1 / -1; }
+.field label { font-size: 11px; font-weight: 800; }
+.field label span { color: var(--muted); font-weight: 400; }
+.field input, .field select, .field textarea {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+  color: var(--ink);
+  background: var(--white);
+  font: inherit;
+  font-size: 12px;
 }
-
-.info-card p, .info-card li {
-  font-size: 14px;
-  color: var(--muted);
-  margin-bottom: 8px;
+.field textarea { min-height: 90px; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: 2px solid rgba(37,99,235,.15);
+  border-color: var(--blue);
 }
+.form-actions { display: flex; justify-content: flex-end; gap: 8px; padding-top: 4px; }
 
-.info-card ol {
-  padding-left: 20px;
+.history-list { display: grid; gap: 8px; }
+.history-item {
+  min-height: 72px;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--white);
 }
+.icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  font-weight: 800;
+}
+.icon.good { color: var(--green); background: #e9f7ef; }
+.icon.warning { color: var(--orange); background: #fff4df; }
+.icon.danger { color: var(--red); background: #fdeaea; }
+.history-item strong, .history-item small { display: block; }
+.history-item strong { font-size: 12px; }
+.history-item small { margin-top: 4px; color: var(--muted); font-size: 10px; }
+.badge.good { color: var(--green); background: #e9f7ef; }
+.badge.warning { color: var(--orange); background: #fff4df; }
+.badge.danger { color: var(--red); background: #fdeaea; }
 
-/* =========================================
-   TAMPILAN DESKTOP (LAPTOP/TABLET)
-   ========================================= */
-@media (min-width: 768px) {
-  body {
-    padding-bottom: 0;
-  }
-  
+.help-grid { display: grid; gap: 10px; }
+.info-card { padding: 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--white); }
+.info-card h3 { margin: 0 0 10px; font-size: 14px; }
+.info-card p, .info-card li { color: var(--muted); font-size: 12px; line-height: 1.55; }
+.info-card ol { margin: 0; padding-left: 18px; }
+.info-card strong { color: var(--ink); }
+
+@media (min-width: 760px) {
+  body { padding-bottom: 0; }
+  .topbar { padding: 0 32px; }
+  main { max-width: 980px; margin: 0 auto; }
+  .section { padding: 30px; }
+  .hero { margin-top: 18px; border-radius: 16px; padding: 48px; }
+  .hero h1 { font-size: 44px; }
+  .lead { max-width: 650px; }
+  .metrics { max-width: 520px; }
   .nav-bar {
     position: static;
+    height: 52px;
+    max-width: 980px;
+    grid-template-columns: repeat(6, 1fr);
     justify-content: center;
-    gap: 16px;
-    border-top: none;
-    border-bottom: 1px solid var(--line);
-    max-width: 800px;
     margin: 0 auto;
-    background: transparent;
+    border: 0;
   }
-  
-  .nav-bar a {
-    flex-direction: row;
-    gap: 8px;
-    font-size: 16px;
-  }
-
-  .nav-bar a small {
-    font-size: 14px;
-  }
-
-  .hero {
-    margin: 24px;
-    border-radius: 16px;
-    border: 1px solid var(--line);
-    padding: 48px;
-  }
-
-  .hero h1 {
-    font-size: 42px;
-  }
-
-  .primary-button {
-    width: auto;
-    display: inline-block;
-  }
-
-  .form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 32px;
-  }
-
-  .field.full {
-    grid-column: 1 / -1;
-  }
-
-  .form-actions {
-    flex-direction: row;
-    justify-content: flex-end;
-  }
-  
-  .form-actions .primary-button, 
-  .form-actions .secondary-button {
-    width: auto;
-  }
-
-  .help-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
+  .nav-bar a { flex-direction: row; gap: 7px; }
+  .nav-bar a small { font-size: 12px; }
+  .help-grid { grid-template-columns: 1fr 1fr; }
 }
