@@ -5,8 +5,8 @@
   --ink: #172033;
   --muted: #667085;
   --line: #e5eaf0;
-  --canvas: #f8fafc; 
-  --white: #fff;
+  --canvas: #f5f7fa;
+  --white: #ffffff;
   --green: #168a4b;
   --orange: #b7791f;
   --red: #c83b3b;
@@ -18,8 +18,9 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   background-color: var(--canvas);
   color: var(--ink);
-  padding-bottom: 70px; /* Ruang untuk menu bawah */
+  padding-bottom: 70px;
   line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
 }
 
 a { text-decoration: none; color: inherit; }
@@ -82,11 +83,10 @@ a { text-decoration: none; color: inherit; }
 
 /* --- KONTEN UTAMA --- */
 main { width: 100%; max-width: 800px; margin: 0 auto; }
-.section { padding: 24px 16px; }
 
-/* --- BERANDA (HERO) --- */
+/* BERANDA (SEKARANG PUTIH BERSIH) */
 .hero {
-  background: linear-gradient(180deg, #ffffff 0%, var(--blue-soft) 100%);
+  background-color: var(--white); /* Dibuat putih agar nyatu */
   padding: 32px 24px;
   border-bottom: 1px solid var(--line);
 }
@@ -111,32 +111,32 @@ main { width: 100%; max-width: 800px; margin: 0 auto; }
   font-weight: bold; font-size: 14px; border: 1px solid var(--line); width: 100%;
 }
 
+/* KOTAK STATISTIK */
 .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 32px; }
 .metrics article {
   background-color: var(--white); padding: 16px 8px;
-  border-radius: 10px; text-align: center; border: 1px solid var(--line);
+  border-radius: 10px; text-align: center; 
+  border: 1px solid var(--line); /* Pakai border aja biar tegas */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.03); /* Shadow tipis */
 }
 .metrics strong { display: block; font-size: 22px; color: var(--ink); margin-bottom: 4px; }
 .metrics span { font-size: 11px; color: var(--muted); }
 
-/* --- JUDUL SECTION --- */
+/* --- SECTION & FORM LAPORAN --- */
+.section { padding: 24px 16px; }
 .section-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
 .section-head h2 { font-size: 22px; letter-spacing: -0.5px; }
 
-/* --- FORM LAPORAN (PAS SEHALAMAN DI MOBILE) --- */
-/* Kotak luar dibuat putih dan menyatu dengan background halaman */
 .form {
-  background-color: transparent; 
   display: flex; 
   flex-direction: column; 
-  gap: 12px; /* Jarak antar input diperkecil */
+  gap: 12px;
 }
 
 .field { display: flex; flex-direction: column; gap: 4px; }
 .field label { font-size: 12px; font-weight: bold; color: var(--ink); }
 .field label span { color: var(--muted); font-weight: normal; }
 
-/* Input diberi warna abu-abu terang agar terlihat jelas */
 .field input, .field select, .field textarea {
   width: 100%; 
   padding: 10px 12px; 
@@ -144,21 +144,16 @@ main { width: 100%; max-width: 800px; margin: 0 auto; }
   border-radius: 8px;
   font-family: inherit; 
   font-size: 14px; 
-  background-color: #f3f4f6;
+  background-color: #f3f4f6; /* Input abu terang */
   color: var(--ink);
 }
 
-/* Textarea dikecilkan agar tidak makan tempat (ngepas layar) */
-.field textarea { 
-  resize: none; 
-  min-height: 70px; 
-}
+.field textarea { resize: none; min-height: 70px; }
 
 .field input:focus, .field select:focus, .field textarea:focus {
   outline: none; border-color: var(--blue); background-color: var(--white);
 }
 
-/* Tombol aksi form */
 .form-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
 
 /* --- RIWAYAT --- */
@@ -191,6 +186,7 @@ main { width: 100%; max-width: 800px; margin: 0 auto; }
 .info-card p, .info-card li { font-size: 13px; color: var(--muted); margin-bottom: 6px; line-height: 1.5; }
 .info-card ol { padding-left: 18px; }
 
+
 /* =========================================
    TAMPILAN DESKTOP (LAPTOP/TABLET)
    ========================================= */
@@ -206,11 +202,15 @@ main { width: 100%; max-width: 800px; margin: 0 auto; }
   .nav-bar a { flex-direction: row; gap: 8px; font-size: 16px; }
   .nav-bar a small { font-size: 14px; }
 
-  .hero { margin: 24px; border-radius: 16px; border: 1px solid var(--line); padding: 48px; }
+  .hero { 
+    margin: 24px; 
+    border-radius: 12px; 
+    border: 1px solid var(--line); 
+    padding: 48px; 
+  }
   .hero h1 { font-size: 42px; }
   .primary-button { width: auto; }
 
-  /* Form di Desktop kembali menjadi 2 kolom */
   .form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0; }
   .field.full { grid-column: 1 / -1; }
   .field textarea { min-height: 100px; }
