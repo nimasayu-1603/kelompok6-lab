@@ -131,19 +131,23 @@ main {
   text-transform: uppercase;
 }
 
-// HERO SECTION (BERANDA)
+// HERO SECTION (BERANDA) - DIBUAT LEBIH TINGGI
 .hero {
-  padding-top: 32px;
-  padding-bottom: 32px;
+  min-height: calc(100vh - 64px - 70px); // Memaksa tinggi hampir 1 layar penuh HP
+  display: flex;
+  flex-direction: column;
+  justify-content: center; // Konten ditengahkan secara vertikal
+  padding-top: 40px;
+  padding-bottom: 60px; // Jarak napas ekstra ke bawah
   background: linear-gradient(160deg, #ffffff 40%, #edf4ff 100%);
   border-bottom: 1px solid var(--line);
 }
 
-.hero h1 { margin: 0 0 16px 0; font-size: 32px; line-height: 1.15; letter-spacing: -1px; }
+.hero h1 { margin: 0 0 16px 0; font-size: 36px; line-height: 1.15; letter-spacing: -1px; }
 .hero h1 span { color: var(--blue); }
 
 .lead {
-  margin: 0 0 24px 0;
+  margin: 0 0 32px 0;
   color: var(--muted);
   font-size: 15px;
   line-height: 1.6;
@@ -174,7 +178,7 @@ main {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  margin-top: 24px;
+  margin-top: 40px; // Jarak lebih jauh dari tombol
 }
 
 .metrics article {
@@ -318,15 +322,16 @@ main {
   .section { padding: 32px; }
   
   .hero {
+    min-height: auto; // Di desktop, tinggi hero kembali normal mengikuti konten
     margin: 24px 32px;
     border-radius: 16px;
     border: 1px solid var(--line);
-    padding: 48px;
+    padding: 64px 48px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.03);
   }
   
-  .hero h1 { font-size: 42px; }
-  .lead { max-width: 600px; font-size: 16px; }
+  .hero h1 { font-size: 48px; }
+  .lead { max-width: 600px; font-size: 16px; margin-bottom: 40px; }
 
   .form { grid-template-columns: 1fr 1fr; padding: 32px; }
   .field.full { grid-column: 1 / -1; }
