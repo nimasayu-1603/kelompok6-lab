@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>InventraLab - Riwayat</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Style khusus untuk tombol hapus */
+        .btn-delete {
+            background: #fdeaea; color: #c83b3b; border: none;
+            width: 36px; height: 36px; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: background 0.2s; margin-left: auto;
+        }
+        .btn-delete:hover { background: #fca5a5; }
+        .history-item { display: flex; align-items: center; gap: 12px; flex-wrap: nowrap; }
+        .history-text { flex: 1; min-width: 0; }
+    </style>
     <script>
         if (sessionStorage.getItem('isLoggedIn') !== 'true') { window.location.href = 'index.html'; }
     </script>
@@ -51,25 +63,23 @@
         document.getElementById('userNameDisplay').innerText = sessionStorage.getItem('userName') || 'User';
         document.getElementById('userRoleDisplay').innerText = sessionStorage.getItem('userRole') || 'Role';
 
-        // Data Dummy Awal
         const dummyData = [
-            { kode: 'LAB-01', nama: 'Budi Santoso', lab: 'Lab Komputer 1', kondisi: 'Baik', tanggal: '12 Nov 2026' },
-            { kode: 'LAB-08', nama: 'Siti Aminah', lab: 'Lab Komputer 3', kondisi: 'Perlu Perbaikan', tanggal: '11 Nov 2026' },
-            { kode: 'LAB-15', nama: 'Andi Wijaya', lab: 'Lab Komputer 5', kondisi: 'Rusak', tanggal: '10 Nov 2026' },
-            { kode: 'LAB-22', nama: 'Dewi Lestari', lab: 'Lab Komputer 8', kondisi: 'Baik', tanggal: '09 Nov 2026' }
+            { id: 'dummy1', kode: 'LAB-01', nama: 'Budi Santoso', lab: 'Lab Komputer 1', kondisi: 'Baik', tanggal: '12 Nov 2026' },
+            { id: 'dummy2', kode: 'LAB-08', nama: 'Siti Aminah', lab: 'Lab Komputer 3', kondisi: 'Perlu Perbaikan', tanggal: '11 Nov 2026' },
+            { id: 'dummy3', kode: 'LAB-15', nama: 'Andi Wijaya', lab: 'Lab Komputer 5', kondisi: 'Rusak', tanggal: '10 Nov 2026' },
+            { id: 'dummy4', kode: 'LAB-22', nama: 'Dewi Lestari', lab: 'Lab Komputer 8', kondisi: 'Baik', tanggal: '09 Nov 2026' }
         ];
 
         function tampilkanRiwayat() {
             const container = document.getElementById('historyContainer');
             let dataRiwayat = JSON.parse(localStorage.getItem('inventraLabData'));
 
-            // Jika belum ada data dari form, gunakan data dummy
             if (!dataRiwayat || dataRiwayat.length === 0) {
                 dataRiwayat = dummyData;
             }
 
             let html = '';
-            dataRiwayat.forEach(item => {
+            dataRiwayat.forEach((item, index) => {
                 let badgeClass = 'badge-good';
                 let iconClass = 'icon-good';
                 let iconChar = '✓';
@@ -85,11 +95,47 @@
                             <small>${item.lab} · ${item.tanggal}</small>
                         </div>
                         <span class="badge ${badgeClass}">${item.kondisi}</span>
+                        <button class="btn-delete" onclick="hapusLaporan('${item.id}')" title="Hapus Laporan">
+                            <svg style="width:18px; height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
                     </article>
                 `;
             });
             container.innerHTML = html;
         }
+
+        // Fungsi untuk menghapus laporan
+        function hapusLaporan(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus laporan ini?')) {
+                let dataRiwayat = JSON.parse(localStorage.getItem('inventraLabData')) || [];
+                
+                // Jika data masih menggunakan dummy (belum pernah nambah data), reset total
+                if (dataRiwayat.length === 0) {
+                    localStorage.setItem('inventraLabData', JSON.stringify([]));
+                    // Trik agar dummy tidak muncul lagi: simpan array kosong
+                    // Tapi karena fungsi tampilkanRiwayat akan memanggil dummy jika data kosong,
+                    // kita harus ubah sedikit logikanya.
+                    // Solusi: Jika yang dihapus adalah dummy, kita simpan penanda.
+                    let dummyFiltered = dummyData.filter(d => d.id !== id);
+                    // Kita simpan sisa dummy ke localStorage agar tidak balik ke awal
+                    if(dummyFiltered.length > 0) {
+                        localStorage.setItem('inventraLabData', JSON.stringify(dummyFiltered));
+                    } else {
+                         // Jika semua dummy dihapus, simpan array kosong tapi cegah dummy muncul
+                         localStorage.setItem('inventraLabData', JSON.stringify([]));
+                    }
+                    tampilkanRiwayat();
+                    return;
+                }
+
+                // Filter data untuk membuang yang ID-nya cocok
+                const dataBaru = dataRiwayat.filter(item => item.id !== id);
+                localStorage.setItem('inventraLabData', JSON.stringify(dataBaru));
+                
+                tampilkanRiwayat();
+            }
+        }
+
         tampilkanRiwayat();
     </script>
 </body>
