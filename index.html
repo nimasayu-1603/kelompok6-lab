@@ -187,12 +187,15 @@
 
         function renderRecentHistory() {
             const container = document.getElementById('recentHistory');
-            let data = JSON.parse(localStorage.getItem('inventraLabData'));
             
-            if (!data) {
-                data = dummyData;
-                localStorage.setItem('inventraLabData', JSON.stringify(data));
+            // Cek penanda inisialisasi
+            const isInit = localStorage.getItem('isDataInit');
+            if (!isInit) {
+                localStorage.setItem('inventraLabData', JSON.stringify(dummyData));
+                localStorage.setItem('isDataInit', 'true');
             }
+
+            let data = JSON.parse(localStorage.getItem('inventraLabData')) || [];
 
             if (data.length === 0) {
                 container.innerHTML = '<div style="text-align:center; padding:20px; color:var(--muted); font-size:14px; background:white; border-radius:12px; border:1px solid var(--line);">Belum ada laporan terbaru.</div>';
