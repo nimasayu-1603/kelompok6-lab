@@ -1,16 +1,88 @@
 <!doctype html>
 <html lang="id">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>InventraLab - Dasbor</title><link rel="stylesheet" href="styles.css"></head>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>InventraLab - Dasbor</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') { window.location.href = 'index.html'; }
+    </script>
+</head>
 <body>
-  <header class="topbar"><a class="brand" href="index.html"><span class="brand-mark">IL</span><span><strong>InventraLab</strong><small>Lab Komputer 1–10</small></span></a><span class="avatar">KJ</span></header>
-  <nav class="nav-bar" aria-label="Navigasi utama">
-    <a href="index.html"><span>⌂</span><small>Beranda</small>
-    </a><a href="riwayat.html"><span>◷</span><small>Riwayat</small>
-    </a><a href="laporan.html"><span>＋</span><small>Laporan</small></a>
-    <a class="active" href="dashboard.html"><span>▥</span><small>Dasbor</small></a>
-    <a href="panduan.html"><span>?</span><small>Panduan</small></a>
-    <a href="kontak.html"><span>✉</span><small>Kontak</small></a>
-  </nav>
-  <main><section class="section"><div class="section-head"><div><p class="eyebrow">RINGKASAN</p><h2>Dasbor Inventaris</h2></div></div><div class="metrics"><article><strong>248</strong><span>Total perangkat</span></article><article><strong>194</strong><span>Kondisi baik</span></article><article><strong>36</strong><span>Perlu perbaikan</span></article></div><div class="help-grid" style="margin-top:16px"><article class="info-card"><h3>Perlu perhatian</h3><p>18 perangkat rusak atau hilang memerlukan verifikasi.</p></article><article class="info-card"><h3>Pembaruan terakhir</h3><p>4 perangkat diperbarui pada hari ini.</p></article></div></section></main>
+    <div id="appScreen" style="display:flex;">
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-logo">IL</div>
+                <div class="brand-text">InventraLab</div>
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                    <strong id="userNameDisplay">User</strong>
+                    <span id="userRoleDisplay">Role</span>
+                </div>
+                <button onclick="sessionStorage.clear(); window.location.href='index.html';" class="btn-logout">LR</button>
+            </div>
+        </header>
+
+        <nav class="nav-bar">
+            <a href="index.html">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                <span>Beranda</span>
+            </a>
+            <a href="riwayat.html">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span>Riwayat</span>
+            </a>
+            <a href="laporan.html">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                <span>Laporan</span>
+            </a>
+            <a href="#" class="active">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                <span>Dasbor</span>
+            </a>
+            <a href="panduan.html">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span>Panduan</span>
+            </a>
+            <a href="kontak.html">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                <span>Kontak</span>
+            </a>
+        </nav>
+
+        <main>
+            <div class="section-title">
+                <p class="eyebrow">RINGKASAN</p>
+                <h2>Dasbor Inventaris</h2>
+            </div>
+
+            <div class="metrics">
+                <article>
+                    <strong id="totalBaru" style="color:var(--blue);">0</strong>
+                    <span>Laporan Masuk</span>
+                </article>
+                <article>
+                    <strong id="totalRusak" style="color:var(--red);">0</strong>
+                    <span>Butuh Perbaikan</span>
+                </article>
+                <article>
+                    <strong style="color:var(--ink);">248</strong>
+                    <span>Total Asli Lab</span>
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('userNameDisplay').innerText = sessionStorage.getItem('userName') || 'User';
+        document.getElementById('userRoleDisplay').innerText = sessionStorage.getItem('userRole') || 'Role';
+
+        let dataRiwayat = JSON.parse(localStorage.getItem('inventraLabData')) || [];
+        document.getElementById('totalBaru').innerText = dataRiwayat.length;
+        let perluPerbaikan = dataRiwayat.filter(item => item.kondisi === 'Perlu Perbaikan' || item.kondisi === 'Rusak' || item.kondisi === 'Hilang').length;
+        document.getElementById('totalRusak').innerText = perluPerbaikan;
+    </script>
 </body>
 </html>
