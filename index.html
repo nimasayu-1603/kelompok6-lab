@@ -38,7 +38,7 @@
                 
                 <div class="demo-accounts">
                     <p>Akun Demo:</p>
-                    <ul style="grid-template-columns: 1fr; gap: 8px;">
+                    <ul>
                         <li><b>Siswa RPL</b> : siswarpl / rpl123</li>
                         <li><b>Siswa DKV</b> : siswadkv / dkv123</li>
                         <li><b>Laboran</b> : laboran / laboran123</li>
@@ -92,7 +92,7 @@
         </nav>
 
         <main>
-            <div class="hero-card">
+            <div class="hero-card" style="margin-bottom: 24px;">
                 <p class="eyebrow">INVENTARIS LABORATORIUM</p>
                 <h1>Catat perangkat.<br><span>Update kondisinya.</span></h1>
                 <p class="lead">Sistem pendataan inventaris untuk mempermudah pelaporan kondisi perangkat komputer secara terpusat.</p>
@@ -117,6 +117,13 @@
                     </article>
                 </div>
             </div>
+
+            <!-- Bagian Baru: Riwayat Terakhir di Beranda -->
+            <div class="section-head">
+                <h2>Laporan Terakhir</h2>
+                <a href="riwayat.html" style="color:var(--blue); font-size:14px; font-weight:bold;">Lihat Semua</a>
+            </div>
+            <div id="recentHistory" class="history-list"></div>
         </main>
     </div>
 
@@ -127,6 +134,12 @@
             'laboran': { pass: 'laboran123', name: 'Laboran', role: 'Laboran' },
             'kepalajurusan': { pass: 'kajur123', name: 'Kepala Jurusan', role: 'Kepala Jurusan' }
         };
+
+        // Data Dummy untuk ditampilkan jika belum ada laporan
+        const dummyData = [
+            { kode: 'LAB-01', nama: 'Budi', lab: 'Lab Komputer 1', kondisi: 'Baik', tanggal: '12 Nov 2026' },
+            { kode: 'LAB-04', nama: 'Siti', lab: 'Lab Komputer 2', kondisi: 'Perlu Perbaikan', tanggal: '11 Nov 2026' }
+        ];
 
         document.addEventListener('DOMContentLoaded', () => {
             if (sessionStorage.getItem('isLoggedIn') === 'true') {
@@ -162,9 +175,9 @@
             document.getElementById('loginScreen').style.display = 'none';
             const app = document.getElementById('appScreen');
             app.style.display = 'flex';
-            
             if(name) document.getElementById('userNameDisplay').innerText = name;
             if(role) document.getElementById('userRoleDisplay').innerText = role;
+            renderRecentHistory();
         }
 
         function showLogin() {
@@ -172,6 +185,32 @@
             document.getElementById('loginScreen').style.display = 'flex';
             document.getElementById('formLogin').reset();
             document.getElementById('loginError').style.display = 'none';
+        }
+
+        function renderRecentHistory() {
+            const container = document.getElementById('recentHistory');
+            let data = JSON.parse(localStorage.getItem('inventraLabData'));
+            if (!data || data.length === 0) data = dummyData;
+
+            const recent = data.slice(0, 2);
+            let html = '';
+            recent.forEach(item => {
+                let badgeClass = 'badge-good', iconClass = 'icon-good', iconChar = '✓';
+                if (item.kondisi === 'Perlu Perbaikan') { badgeClass = 'badge-warning'; iconClass = 'icon-warning'; iconChar = '◷'; }
+                else if (item.kondisi === 'Rusak' || item.kondisi === 'Hilang') { badgeClass = 'badge-danger'; iconClass = 'icon-danger'; iconChar = '!'; }
+
+                html += `
+                    <article class="history-item">
+                        <span class="history-icon ${iconClass}">${iconChar}</span>
+                        <div class="history-text">
+                            <strong>${item.kode} · ${item.nama}</strong>
+                            <small>${item.lab} · ${item.tanggal}</small>
+                        </div>
+                        <span class="badge ${badgeClass}">${item.kondisi}</span>
+                    </article>
+                `;
+            });
+            container.innerHTML = html;
         }
     </script>
 </body>
