@@ -20,7 +20,7 @@
                     <div class="brand-logo">IL</div>
                     <div class="brand-text">InventraLab</div>
                 </div>
-                <h2>Selamat Datang 👋</h2>
+                <h2>Selamat Datang</h2>
                 <p>Silakan masuk untuk mengakses dasbor inventaris.</p>
                 
                 <form id="formLogin">
@@ -38,11 +38,11 @@
                 
                 <div class="demo-accounts">
                     <p>Akun Demo:</p>
-                    <ul>
-                        <li><b>siswarpl</b> : rpl123</li>
-                        <li><b>laboran</b> : laboran123</li>
-                        <li><b>kepala</b> : kepala123</li>
-                        <li><b>dkv</b> : dkv123</li>
+                    <ul style="grid-template-columns: 1fr; gap: 8px;">
+                        <li><b>Siswa RPL</b> : siswarpl / rpl123</li>
+                        <li><b>Siswa DKV</b> : siswadkv / dkv123</li>
+                        <li><b>Laboran</b> : laboran / laboran123</li>
+                        <li><b>Kepala Jurusan</b> : kepalajurusan / kajur123</li>
                     </ul>
                 </div>
             </div>
@@ -122,10 +122,10 @@
 
     <script>
         const users = {
-            'siswarpl': { pass: 'rpl123', name: 'Siswa RPL', role: 'Siswa' },
+            'siswarpl': { pass: 'rpl123', name: 'Siswa RPL', role: 'Siswa RPL' },
+            'siswadkv': { pass: 'dkv123', name: 'Siswa DKV', role: 'Siswa DKV' },
             'laboran': { pass: 'laboran123', name: 'Laboran', role: 'Laboran' },
-            'kepala': { pass: 'kepala123', name: 'Kepala Jurusan', role: 'Kepala' },
-            'dkv': { pass: 'dkv123', name: 'Siswa DKV', role: 'Siswa' }
+            'kepalajurusan': { pass: 'kajur123', name: 'Kepala Jurusan', role: 'Kepala Jurusan' }
         };
 
         document.addEventListener('DOMContentLoaded', () => {
