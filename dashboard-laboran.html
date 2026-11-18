@@ -2,6 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>InventraLab - Dasbor Laboran</title>
     <link rel="stylesheet" href="style.css">
     <script>
@@ -15,19 +16,26 @@
             <div class="brand"><div class="brand-logo" style="background:var(--navy);">IL</div><div class="brand-text">InventraLab</div></div>
             <div class="user-info"><button onclick="sessionStorage.clear(); window.location.href='login.html';" class="btn-logout">LR</button></div>
         </header>
+
         <nav class="nav-bar">
-            <a href="index-laboran.html"><span>Verifikasi</span></a>
+            <a href="index-laboran.html"><span>Kelola Laporan</span></a>
             <a href="dashboard-laboran.html" class="active"><span>Dasbor</span></a>
         </nav>
+
         <main>
-            <div class="section-title"><p class="eyebrow">STATISTIK GLOBAL</p><h2>Dasbor Laboran</h2></div>
+            <div class="section-title">
+                <p class="eyebrow">STATISTIK GLOBAL</p>
+                <h2>Dasbor Laboran</h2>
+            </div>
+
             <div class="metrics">
-                <article><strong id="statTotal" style="color:var(--blue);">0</strong><span>Total Masuk</span></article>
+                <article><strong id="statTotal" style="color:var(--blue);">0</strong><span>Total Laporan</span></article>
                 <article><strong id="statPending" style="color:var(--orange);">0</strong><span>Belum Diperbaiki</span></article>
                 <article><strong id="statSelesai" style="color:var(--green);">0</strong><span>Telah Diperbaiki</span></article>
             </div>
         </main>
     </div>
+
     <script>
         let data = JSON.parse(localStorage.getItem('inventraLabData')) || [];
         document.getElementById('statTotal').innerText = data.length;
