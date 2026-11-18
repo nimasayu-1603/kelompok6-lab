@@ -2,28 +2,28 @@
 <html lang="id">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Buat Laporan - InventraLab</title>
     <link rel="stylesheet" href="style.css">
     <script>
-        if (sessionStorage.getItem('isLoggedIn') !== 'true') window.location.href = 'login.html';
-        if (sessionStorage.getItem('userRole') !== 'Siswa') window.location.href = 'login.html';
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') window.location.href = 'index.html';
+        if (sessionStorage.getItem('userRole') !== 'Siswa') window.location.href = 'index.html';
     </script>
 </head>
-<body>
-    <div id="appScreen" style="display:flex;">
+<body style="display:flex; flex-direction:column; min-height:100vh; padding-bottom: 80px;">
+    <div id="appScreen" style="display:flex; flex-direction:column; flex:1;">
         <header class="topbar">
-            <div class="brand"><div class="brand-logo">IL</div><div class="brand-text">InventraLab</div></div>
-            <div class="user-info"><button onclick="sessionStorage.clear(); window.location.href='login.html';" class="btn-logout">LR</button></div>
+            <div class="brand"><div class="brand-logo" style="background:var(--blue);">IL</div><div class="brand-text">InventraLab</div></div>
+            <div class="user-info"><button onclick="sessionStorage.clear(); window.location.href='index.html';" class="btn-logout"><svg style="width:18px; height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg></button></div>
         </header>
         <nav class="nav-bar">
             <a href="index-siswa.html"><span>Beranda</span></a>
             <a href="dashboard-siswa.html"><span>Dasbor</span></a>
             <a href="laporan-siswa.html" class="active"><span>Laporan</span></a>
             <a href="riwayat-siswa.html"><span>Riwayat</span></a>
-            <a href="panduan-siswa.html"><span>Panduan</span></a>
-            <a href="kontak-siswa.html"><span>Kontak</span></a>
+            <a href="about.html"><span>Tentang</span></a>
         </nav>
-        <main>
+        <main style="flex:1;">
             <h2>Buat Laporan Baru</h2>
             <form id="formLaporan" class="form-card" style="margin-top:16px;">
                 <div class="field full"><label>Nama Pelapor</label><input id="nama" type="text" readonly style="background:#e5eaf0;"></div>
@@ -31,10 +31,16 @@
                 <div class="field"><label>Kode Perangkat</label><input id="kode" type="text" required placeholder="Contoh: LAB-001"></div>
                 <div class="field full"><label>Kondisi</label><select id="kondisi"><option>Perlu Perbaikan</option><option>Rusak</option><option>Hilang</option></select></div>
                 <div class="field full"><label>Catatan</label><textarea id="catatan" placeholder="Jelaskan detail kerusakan..."></textarea></div>
-                <div class="form-actions"><a href="index-siswa.html" class="btn-secondary">Batal</a><button type="submit" class="btn-primary">Kirim Laporan</button></div>
+                <div class="form-actions">
+                    <a href="index-siswa.html" class="btn-secondary">Batal</a>
+                    <button type="submit" class="btn-primary">Kirim Laporan</button>
+                </div>
             </form>
         </main>
     </div>
+    <footer style="text-align:center; padding:20px; font-size:13px; color:var(--muted); border-top:1px solid var(--line); background:white; margin-bottom: 60px;">
+        Copyright &copy; 2026 - Kelompok 6
+    </footer>
     <script>
         document.getElementById('nama').value = sessionStorage.getItem('userName');
         document.getElementById('formLaporan').addEventListener('submit', function(e) {
