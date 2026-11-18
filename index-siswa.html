@@ -2,97 +2,78 @@
 <html lang="id">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>InventraLab - Beranda Siswa</title>
+    <title>InventraLab - Siswa</title>
     <link rel="stylesheet" href="style.css">
     <script>
-        // Proteksi Ganda: Cek Login & Tendang Laboran
-        if (sessionStorage.getItem('isLoggedIn') !== 'true') { window.location.href = 'login.html'; }
-        if (sessionStorage.getItem('userRole') === 'Laboran') { window.location.href = 'index-laboran.html'; }
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') window.location.href = 'login.html';
+        if (sessionStorage.getItem('userRole') !== 'Siswa') window.location.href = 'login.html';
     </script>
 </head>
 <body>
     <div id="appScreen" style="display:flex;">
         <header class="topbar">
-            <div class="brand">
-                <div class="brand-logo">IL</div>
-                <div class="brand-text">InventraLab</div>
-            </div>
+            <div class="brand"><div class="brand-logo">IL</div><div class="brand-text">InventraLab</div></div>
             <div class="user-info">
-                <div class="user-details">
-                    <strong id="userNameDisplay">User</strong>
-                    <span id="userRoleDisplay">Role</span>
-                </div>
-                <!-- Logout ke login.html -->
+                <div class="user-details"><strong id="userNameDisplay">User</strong><span id="userRoleDisplay">Siswa</span></div>
                 <button onclick="sessionStorage.clear(); window.location.href='login.html';" class="btn-logout">LR</button>
             </div>
         </header>
 
         <nav class="nav-bar">
-            <a href="index-siswa.html" class="active">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                <span>Beranda</span>
-            </a>
-            <a href="riwayat-siswa.html">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                <span>Riwayat</span>
-            </a>
-            <a href="laporan-siswa.html">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                <span>Laporan</span>
-            </a>
-            <a href="dashboard-siswa.html">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-                <span>Dasbor</span>
-            </a>
-            <a href="kontak-siswa.html">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                <span>Kontak</span>
-            </a>
+            <a href="index-siswa.html" class="active"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg><span>Beranda</span></a>
+            <a href="dashboard-siswa.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg><span>Dasbor</span></a>
+            <a href="laporan-siswa.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg><span>Laporan</span></a>
+            <a href="riwayat-siswa.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Riwayat</span></a>
+            <a href="panduan-siswa.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Panduan</span></a>
+            <a href="kontak-siswa.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg><span>Kontak</span></a>
         </nav>
 
         <main>
-            <div class="hero-card" style="margin-bottom: 24px;">
-                <p class="eyebrow">INVENTARIS LABORATORIUM</p>
-                <h1>Catat perangkat.<br><span>Update kondisinya.</span></h1>
-                <p class="lead">Sistem pendataan inventaris untuk mempermudah pelaporan kondisi perangkat komputer secara terpusat.</p>
-                
-                <a href="laporan-siswa.html" class="btn-primary" style="display:inline-flex; width:auto;">
-                    <svg style="width:18px; height:18px; margin-right:8px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                    Buat Laporan Baru
-                </a>
+            <div id="notifBanner" style="display:none; background:#e9f7ef; border:1px solid #a3e6b8; padding:16px; border-radius:12px; margin-bottom:20px; justify-content:space-between; align-items:center;">
+                <div>
+                    <strong style="color:var(--green); font-size:14px;">📢 Laporan Anda Telah Selesai!</strong>
+                    <p id="notifText" style="font-size:13px; color:var(--ink); margin-top:4px;"></p>
+                </div>
+                <button onclick="document.getElementById('notifBanner').style.display='none';" style="background:none; border:none; cursor:pointer; font-weight:bold; color:var(--muted);">✕</button>
             </div>
 
-            <div class="section-head">
-                <h2>Laporan Terakhir</h2>
-                <a href="riwayat-siswa.html" style="color:var(--blue); font-size:14px; font-weight:bold;">Lihat Semua</a>
+            <div class="hero-card" style="margin-bottom: 24px;">
+                <p class="eyebrow">INVENTARIS LABORATORIUM</p>
+                <h1>Halo, <span id="heroName">Siswa</span>!</h1>
+                <p class="lead">Ada alat yang rusak? Laporkan sekarang agar bisa segera diperbaiki oleh Laboran.</p>
+                <a href="laporan-siswa.html" class="btn-primary" style="display:inline-flex; width:auto;">Buat Laporan Baru</a>
             </div>
+
+            <div class="section-head"><h2>Laporan Terakhir Anda</h2><a href="riwayat-siswa.html" style="color:var(--blue); font-size:14px; font-weight:bold;">Lihat Semua</a></div>
             <div id="recentHistory" class="history-list"></div>
         </main>
     </div>
 
     <script>
-        document.getElementById('userNameDisplay').innerText = sessionStorage.getItem('userName') || 'User';
-        document.getElementById('userRoleDisplay').innerText = sessionStorage.getItem('userRole') || 'Role';
+        const currentUser = sessionStorage.getItem('userName');
+        document.getElementById('userNameDisplay').innerText = currentUser;
+        document.getElementById('userRoleDisplay').innerText = 'Siswa ' + (currentUser.includes('DKV') ? 'DKV' : 'RPL');
+        document.getElementById('heroName').innerText = currentUser;
 
-        // Render riwayat (Sama seperti kode sebelumnya)
         let data = JSON.parse(localStorage.getItem('inventraLabData')) || [];
-        if(data.length > 0) {
-            let html = '';
-            data.slice(0, 2).forEach(item => {
-                html += `
-                    <article class="history-item">
-                        <span class="history-icon icon-good">✓</span>
-                        <div class="history-text">
-                            <strong>${item.kode} · ${item.nama}</strong>
-                            <small>${item.lab} · ${item.tanggal}</small>
-                        </div>
-                        <span class="badge badge-good">${item.kondisi}</span>
-                    </article>
-                `;
-            });
-            document.getElementById('recentHistory').innerHTML = html;
+        const myData = data.filter(item => item.nama === currentUser);
+
+        const laporanSelesai = myData.find(item => item.status === 'Selesai');
+        if (laporanSelesai) {
+            document.getElementById('notifBanner').style.display = 'flex';
+            document.getElementById('notifText').innerHTML = `Perangkat <b>${laporanSelesai.kode}</b> di <b>${laporanSelesai.lab}</b> telah selesai diperbaiki.`;
         }
+
+        let html = '';
+        if (myData.length === 0) {
+            html = '<div style="text-align:center; padding:20px; color:var(--muted); background:white; border-radius:12px; border:1px solid var(--line);">Belum ada laporan.</div>';
+        } else {
+            myData.slice(0, 2).forEach(item => {
+                let badge = item.status === 'Selesai' ? 'badge-good' : 'badge-warning';
+                html += `<article class="history-item"><div class="history-text"><strong>${item.kode} · ${item.kondisi}</strong><small>${item.lab} · ${item.tanggal}</small></div><span class="badge ${badge}">${item.status}</span></article>`;
+            });
+        }
+        document.getElementById('recentHistory').innerHTML = html;
     </script>
 </body>
 </html>
