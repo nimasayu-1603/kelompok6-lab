@@ -6,15 +6,15 @@
     <title>InventraLab - Login</title>
     <link rel="stylesheet" href="style.css">
     <script>
-        // Jika sudah login, langsung lempar ke beranda sesuai role
         if (sessionStorage.getItem('isLoggedIn') === 'true') {
             const role = sessionStorage.getItem('userRole');
-            window.location.href = (role === 'Laboran') ? 'index-laboran.html' : 'index-siswa.html';
+            if (role === 'Laboran') window.location.href = 'index-laboran.html';
+            else if (role === 'Kajur') window.location.href = 'index-kajur.html';
+            else window.location.href = 'index-siswa.html';
         }
     </script>
 </head>
 <body>
-    <!-- Struktur Login Screen -->
     <div id="loginScreen" style="display:flex;">
         <div class="login-left">
             <div style="background:#fff; color:#2563eb; font-size:32px; font-weight:900; padding:20px; border-radius:16px; margin-bottom:24px;">IL</div>
@@ -25,24 +25,17 @@
             <div class="login-box">
                 <h2>Selamat Datang</h2>
                 <p>Silakan masuk untuk mengakses sistem.</p>
-                
                 <form id="formLogin">
                     <div id="loginError" class="error-msg">Username atau password salah!</div>
-                    <div class="input-group">
-                        <label>Username</label>
-                        <input type="text" id="username" required placeholder="Masukkan username">
-                    </div>
-                    <div class="input-group">
-                        <label>Password</label>
-                        <input type="password" id="password" required placeholder="Masukkan password">
-                    </div>
+                    <div class="input-group"><label>Username</label><input type="text" id="username" required></div>
+                    <div class="input-group"><label>Password</label><input type="password" id="password" required></div>
                     <button type="submit" class="btn-login">Masuk ke Sistem</button>
                 </form>
-                
                 <div class="demo-accounts">
                     <p>Akun Demo:</p>
                     <ul>
-                        <li><b>Siswa</b> : siswarpl / rpl123</li>
+                        <li><b>Siswa RPL</b> : siswarpl / rpl123</li>
+                        <li><b>Siswa DKV</b> : siswadkv / dkv123</li>
                         <li><b>Kajur</b> : kepalajurusan / kajur123</li>
                         <li><b>Laboran</b> : laboran / laboran123</li>
                     </ul>
@@ -50,7 +43,6 @@
             </div>
         </div>
     </div>
-
     <script>
         const users = {
             'siswarpl': { pass: 'rpl123', name: 'Siswa RPL', role: 'Siswa' },
@@ -58,23 +50,18 @@
             'laboran': { pass: 'laboran123', name: 'Laboran', role: 'Laboran' },
             'kepalajurusan': { pass: 'kajur123', name: 'Kepala Jurusan', role: 'Kajur' }
         };
-
         document.getElementById('formLogin').addEventListener('submit', function(e) {
             e.preventDefault();
             const userIn = document.getElementById('username').value.toLowerCase().trim();
             const passIn = document.getElementById('password').value;
-            
             if (users[userIn] && users[userIn].pass === passIn) {
                 sessionStorage.setItem('isLoggedIn', 'true');
                 sessionStorage.setItem('userName', users[userIn].name);
                 sessionStorage.setItem('userRole', users[userIn].role);
                 
-                // PENGARAHAN BERDASARKAN ROLE
-                if (users[userIn].role === 'Laboran') {
-                    window.location.href = 'index-laboran.html';
-                } else {
-                    window.location.href = 'index-siswa.html';
-                }
+                if (users[userIn].role === 'Laboran') window.location.href = 'index-laboran.html';
+                else if (users[userIn].role === 'Kajur') window.location.href = 'index-kajur.html';
+                else window.location.href = 'index-siswa.html';
             } else {
                 document.getElementById('loginError').style.display = 'block';
             }
