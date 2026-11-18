@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>InventraLab - Tentang Kami</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') window.location.href = 'login.html';
+    </script>
+</head>
+<body style="display:flex; flex-direction:column; min-height:100vh;">
+    <div id="appScreen" style="display:flex; flex-direction:column; flex:1;">
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-logo" style="background:var(--blue);">IL</div>
+                <div class="brand-text">InventraLab</div>
+            </div>
+            <div class="user-info">
+                <!-- Ikon Logout -->
+                <button onclick="sessionStorage.clear(); window.location.href='login.html';" class="btn-logout" title="Keluar">
+                    <svg style="width:18px; height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                </button>
+            </div>
+        </header>
+
+        <main style="flex:1;">
+            <div class="hero-card" style="text-align:center; margin-bottom:24px;">
+                <h1 style="color:var(--blue);">Tentang Kami</h1>
+                <p class="lead">Aplikasi InventraLab dibuat untuk memenuhi tugas proyek mata pelajaran Pemrograman Web.</p>
+            </div>
+
+            <div class="history-item" style="display:block; padding:24px;">
+                <h2 style="font-size:18px; margin-bottom:16px; border-bottom:2px solid var(--blue-soft); padding-bottom:8px;">Kelompok 6</h2>
+                <p style="font-size:14px; color:var(--muted); margin-bottom:16px;">Berikut adalah anggota tim pengembang aplikasi:</p>
+                
+                <ul style="display:grid; gap:12px; font-size:14px;">
+                    <!-- SILAKAN GANTI NAMA DI BAWAH INI -->
+                    <li style="background:var(--canvas); padding:12px; border-radius:8px; border:1px solid var(--line);">
+                        <strong>1. Nama Anggota 1</strong> - <span style="color:var(--muted);">Frontend Developer</span>
+                    </li>
+                    <li style="background:var(--canvas); padding:12px; border-radius:8px; border:1px solid var(--line);">
+                        <strong>2. Nama Anggota 2</strong> - <span style="color:var(--muted);">Backend Developer</span>
+                    </li>
+                    <li style="background:var(--canvas); padding:12px; border-radius:8px; border:1px solid var(--line);">
+                        <strong>3. Nama Anggota 3</strong> - <span style="color:var(--muted);">UI/UX Designer</span>
+                    </li>
+                </ul>
+            </div>
+        </main>
+    </div>
+    <footer style="text-align:center; padding:20px; font-size:13px; color:var(--muted); border-top:1px solid var(--line); background:white;">
+        Copyright &copy; 2026 - Kelompok 6
+    </footer>
+</body>
+</html>
