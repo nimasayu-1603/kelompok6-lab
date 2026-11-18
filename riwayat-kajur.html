@@ -2,11 +2,12 @@
 <html lang="id">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>InventraLab - Semua Laporan</title>
     <link rel="stylesheet" href="style.css">
     <script>
-        if (sessionStorage.getItem('isLoggedIn') !== 'true') window.location.href = 'login.html';
-        if (sessionStorage.getItem('userRole') !== 'Kajur') window.location.href = 'login.html';
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') window.location.href = 'index.html';
+        if (sessionStorage.getItem('userRole') !== 'Kajur') window.location.href = 'index.html';
     </script>
     <style>
         .filter-bar { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
@@ -14,20 +15,42 @@
         .filter-bar button.active { background:var(--blue); color:#fff; border-color:var(--blue); }
     </style>
 </head>
-<body>
-    <div id="appScreen" style="display:flex;">
+<body style="display:flex; flex-direction:column; min-height:100vh; padding-bottom: 80px;">
+    <div id="appScreen" style="display:flex; flex-direction:column; flex:1;">
+        
         <header class="topbar">
-            <div class="brand"><div class="brand-logo">IL</div><div class="brand-text">InventraLab</div></div>
-            <div class="user-info"><button onclick="sessionStorage.clear(); window.location.href='login.html';" class="btn-logout">LR</button></div>
+            <div class="brand">
+                <div class="brand-logo" style="background:var(--blue);">IL</div>
+                <div class="brand-text">InventraLab</div>
+            </div>
+            <div class="user-info">
+                <div class="user-details"><strong>Kepala Jurusan</strong><span>Kajur</span></div>
+                <button onclick="sessionStorage.clear(); window.location.href='index.html';" class="btn-logout" title="Keluar">
+                    <svg style="width:18px; height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                </button>
+            </div>
         </header>
 
         <nav class="nav-bar">
-            <a href="index-kajur.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg><span>Beranda</span></a>
-            <a href="riwayat-kajur.html" class="active"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg><span>Semua Laporan</span></a>
+            <a href="index-kajur.html">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                <span>Beranda</span>
+            </a>
+            <a href="riwayat-kajur.html" class="active">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                <span>Laporan</span>
+            </a>
+            <a href="about.html">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span>Tentang</span>
+            </a>
         </nav>
 
-        <main>
-            <div class="section-head"><h2>Daftar Semua Laporan</h2></div>
+        <main style="flex:1;">
+            <div class="section-title">
+                <p class="eyebrow">PANEL PIMPINAN</p>
+                <h2>Daftar Semua Laporan</h2>
+            </div>
 
             <div class="filter-bar" id="filterBar">
                 <button data-filter="all" class="active">Semua</button>
@@ -35,23 +58,25 @@
                 <button data-filter="Selesai">Selesai</button>
             </div>
 
-            <div id="laporanContainer" class="history-list" style="gap:16px;"></div>
+            <div id="laporanContainer" class="history-list" style="margin-top:16px;"></div>
         </main>
     </div>
+    
+    <footer style="text-align:center; padding:20px; font-size:13px; color:var(--muted); border-top:1px solid var(--line); background:white; margin-bottom: 60px;">
+        Copyright &copy; 2026 - Kelompok 6
+    </footer>
 
     <script>
         let allData = JSON.parse(localStorage.getItem('inventraLabData')) || [];
         let currentFilter = 'all';
 
         function renderLaporan() {
-            let data = allData;
-            if (currentFilter !== 'all') {
-                data = data.filter(d => d.status === currentFilter);
-            }
-
             const container = document.getElementById('laporanContainer');
+            let data = allData;
+            if (currentFilter !== 'all') data = data.filter(d => d.status === currentFilter);
+
             if (data.length === 0) {
-                container.innerHTML = '<div style="text-align:center; padding:20px; color:var(--muted);">Tidak ada laporan.</div>';
+                container.innerHTML = '<div style="text-align:center; padding:20px; color:var(--muted); background:white; border-radius:12px; border:1px solid var(--line);">Tidak ada laporan pada filter ini.</div>';
                 return;
             }
 
@@ -59,19 +84,19 @@
             data.forEach(item => {
                 let badge = item.status === 'Selesai' ? 'badge-good' : 'badge-warning';
                 html += `
-                    <div class="history-item" style="display:flex; flex-direction:column; align-items:flex-start; gap:8px;">
+                    <article class="history-item" style="display:flex; flex-direction:column; align-items:flex-start; gap:8px;">
                         <div style="width:100%; display:flex; justify-content:space-between; align-items:center;">
                             <div>
                                 <strong>${item.kode}</strong>
-                                <div style="font-size:12px; color:var(--muted);">Pelapor: ${item.nama}</div>
+                                <div style="font-size:12px; color:var(--muted); margin-top:2px;">Pelapor: ${item.nama}</div>
                             </div>
                             <span class="badge ${badge}">${item.status}</span>
                         </div>
-                        <div style="background:var(--canvas); padding:10px; border-radius:8px; font-size:13px; width:100%; border:1px solid var(--line);">
+                        <div style="background:var(--canvas); padding:10px; border-radius:8px; font-size:13px; width:100%; border:1px solid var(--line); margin-top:4px;">
                             <b>Kondisi:</b> ${item.kondisi} | <b>Lab:</b> ${item.lab} | <b>Tanggal:</b> ${item.tanggal}<br>
                             <b>Catatan:</b> ${item.catatan || '-'}
                         </div>
-                    </div>
+                    </article>
                 `;
             });
             container.innerHTML = html;
