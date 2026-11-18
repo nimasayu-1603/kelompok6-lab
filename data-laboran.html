@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>InventraLab - Data Perangkat</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .device-table { width:100%; border-collapse:collapse; background:var(--white); border-radius:12px; overflow:hidden; border:1px solid var(--line); font-size:13px; }
+        .device-table th, .device-table td { padding:12px; text-align:left; border-bottom:1px solid var(--line); }
+        .device-table th { background:var(--canvas); font-size:11px; text-transform:uppercase; color:var(--muted); letter-spacing:.5px; }
+        .device-table tr:last-child td { border-bottom:none; }
+        .device-table td .btn-sm { padding:6px 10px; font-size:11px; }
+        .table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+        .empty-state { text-align:center; padding:32px; background:white; border-radius:12px; border:1px solid var(--line); color:var(--muted); }
+    </style>
+    <script>
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') { window.location.href = 'index.html'; }
+        if (sessionStorage.getItem('userRole') !== 'Laboran') { window.location.href = 'dashboard.html'; }
+    </script>
+</head>
+<body>
+    <div id="appScreen" style="display:flex;">
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-logo">IL</div>
+                <div class="brand-text">InventraLab</div>
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                    <strong id="userNameDisplay">User</strong>
+                    <span id="userRoleDisplay">Role</span>
+                </div>
+                <button onclick="sessionStorage.clear(); window.location.href='index.html';" class="btn-logout">LR</button>
+            </div>
+        </header>
+
+        <nav class="nav-bar">
+            <a href="dashboard-admin.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg><span>Dasbor</span></a>
+            <a href="kelola-laporan.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Kelola</span></a>
+            <a href="#" class="active"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg><span>Perangkat</span></a>
+            <a href="riwayat.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Riwayat</span></a>
+            <a href="panduan.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Panduan</span></a>
+        </nav>
+
+        <main>
+            <div class="section-head">
+                <div>
+                    <p class="eyebrow">DATA MASTER</p>
+                    <h2>Data Perangkat</h2>
+                </div>
+            </div>
+
+            <!-- Form Tambah/Edit Perangkat -->
+            <form id="formPerangkat" class="form-card" style="margin-bottom:20px;">
+                <div class="field full">
+                    <label id="formTitle">Tambah Perangkat Baru</label>
+                    <input type="hidden" id="perangkatId">
+                </div>
+                <div class="field"><label>Kode Perangkat</label><input id="pKode" required placeholder="Contoh: LAB-101"></div>
+                <div class="field"><label>Nama Perangkat</label><input id="pNama" required placeholder="Contoh: PC Desktop Lenovo"></div>
+                <div class="field"><label>Lab</label>
+                    <select id="pLab">
+                        <option>Lab
