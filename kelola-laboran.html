@@ -6,8 +6,8 @@
     <title>InventraLab - Kelola Laporan</title>
     <link rel="stylesheet" href="style.css">
     <script>
-        if (sessionStorage.getItem('isLoggedIn') !== 'true') window.location.href = 'login.html';
-        if (sessionStorage.getItem('userRole') !== 'Laboran') window.location.href = 'login.html';
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') window.location.href = 'index.html';
+        if (sessionStorage.getItem('userRole') !== 'Laboran') window.location.href = 'index.html';
     </script>
     <style>
         .filter-bar { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
@@ -17,19 +17,11 @@
         .btn-selesai { background:var(--green); color:white; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; font-weight:bold; font-size:12px; }
     </style>
 </head>
-<body style="display:flex; flex-direction:column; min-height:100vh;">
+<body style="display:flex; flex-direction:column; min-height:100vh; padding-bottom: 80px;">
     <div id="appScreen" style="display:flex; flex-direction:column; flex:1;">
         <header class="topbar">
-            <div class="brand">
-                <div class="brand-logo" style="background:var(--blue);">IL</div>
-                <div class="brand-text">InventraLab</div>
-            </div>
-            <div class="user-info">
-                <!-- Ikon Logout -->
-                <button onclick="sessionStorage.clear(); window.location.href='login.html';" class="btn-logout" title="Keluar">
-                    <svg style="width:18px; height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                </button>
-            </div>
+            <div class="brand"><div class="brand-logo" style="background:var(--blue);">IL</div><div class="brand-text">InventraLab</div></div>
+            <div class="user-info"><button onclick="sessionStorage.clear(); window.location.href='index.html';" class="btn-logout"><svg style="width:18px; height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg></button></div>
         </header>
         
         <nav class="nav-bar">
@@ -65,7 +57,7 @@
             <div id="laporanContainer" class="history-list" style="gap:16px;"></div>
         </main>
     </div>
-    <footer style="text-align:center; padding:20px; font-size:13px; color:var(--muted); border-top:1px solid var(--line); background:white;">
+    <footer style="text-align:center; padding:20px; font-size:13px; color:var(--muted); border-top:1px solid var(--line); background:white; margin-bottom: 60px;">
         Copyright &copy; 2026 - Kelompok 6
     </footer>
 
