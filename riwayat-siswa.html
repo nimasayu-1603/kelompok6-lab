@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Riwayat - InventraLab</title>
+    <title>InventraLab - Riwayat</title>
     <link rel="stylesheet" href="style.css">
     <script>
         if (sessionStorage.getItem('isLoggedIn') !== 'true') window.location.href = 'index.html';
@@ -24,19 +24,17 @@
             <a href="about.html"><span>Tentang</span></a>
         </nav>
         <main style="flex:1;">
-            <h2>Riwayat Laporan Anda</h2>
-            <div id="historyContainer" class="history-list" style="margin-top:16px;"></div>
+            <div class="section-title"><h2>Riwayat Laporan Anda</h2></div>
+            <div id="historyContainer" class="history-list"></div>
         </main>
     </div>
-    <footer style="text-align:center; padding:20px; font-size:13px; color:var(--muted); border-top:1px solid var(--line); background:white; margin-bottom: 60px;">
-        Copyright &copy; 2026 - Kelompok 6
-    </footer>
+    <footer style="text-align:center; padding:20px; font-size:13px; color:var(--muted); border-top:1px solid var(--line); background:white; margin-bottom: 60px;">Copyright &copy; 2026 - Kelompok 6</footer>
     <script>
         const currentUser = sessionStorage.getItem('userName');
         let data = JSON.parse(localStorage.getItem('inventraLabData')) || [];
         let myData = data.filter(item => item.nama === currentUser);
         if (myData.length === 0) {
-            document.getElementById('historyContainer').innerHTML = '<div style="text-align:center; padding:20px; color:var(--muted);">Belum ada riwayat.</div>';
+            document.getElementById('historyContainer').innerHTML = '<div style="text-align:center; padding:20px; color:var(--muted); background:white; border-radius:12px; border:1px solid var(--line);">Belum ada riwayat.</div>';
         } else {
             let html = '';
             myData.forEach(item => {
