@@ -31,12 +31,12 @@
         </header>
         
         <nav class="nav-bar">
-            <!-- Menu Navigasi -->
+            <!-- Pastikan file index-laboran.html dan dashboard-laboran.html ada di GitHub -->
             <a href="index-laboran.html">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                 <span>Beranda</span>
             </a>
-            <a href="kelola-laboran.html" class="active">
+            <a href="kelola-laporan.html" class="active">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 <span>Kelola</span>
             </a>
@@ -54,20 +54,17 @@
                 </div>
             </div>
 
-            <!-- Filter Status -->
             <div class="filter-bar" id="filterBar">
                 <button data-filter="all" class="active">Semua Laporan</button>
                 <button data-filter="Menunggu">Menunggu</button>
                 <button data-filter="Selesai">Selesai</button>
             </div>
 
-            <!-- Tempat Laporan Muncul -->
             <div id="laporanContainer" class="history-list" style="gap:16px;"></div>
         </main>
     </div>
 
     <script>
-        // Ambil data dari localStorage
         let allData = JSON.parse(localStorage.getItem('inventraLabData')) || [];
         let currentFilter = 'all';
 
@@ -75,12 +72,10 @@
             const container = document.getElementById('laporanContainer');
             let data = allData;
             
-            // Logika Filter
             if (currentFilter !== 'all') {
                 data = data.filter(d => d.status === currentFilter);
             }
 
-            // Jika data kosong
             if (data.length === 0) {
                 container.innerHTML = '<div style="text-align:center; padding:20px; color:var(--muted); background:white; border-radius:12px; border:1px solid var(--line);">Tidak ada laporan pada filter ini.</div>';
                 return;
@@ -89,13 +84,9 @@
             let html = '';
             data.forEach(item => {
                 let badge = item.status === 'Selesai' ? 'badge-good' : 'badge-warning';
-                
-                // Tombol Selesai (Hanya muncul jika status "Menunggu")
                 let btnSelesai = item.status === 'Menunggu' 
                     ? `<button class="btn-selesai" onclick="selesaikan('${item.id}')">Tandai Selesai</button>` 
                     : `<span style="color:var(--green); font-weight:bold; font-size:12px; margin-right:8px;">✓ Sudah Selesai</span>`;
-                
-                // Tombol Hapus
                 let btnHapus = `<button class="btn-hapus" onclick="hapusLaporan('${item.id}')">Hapus</button>`;
 
                 html += `
@@ -123,7 +114,6 @@
             container.innerHTML = html;
         }
 
-        // Fungsi Update Status
         function selesaikan(id) {
             if (confirm('Apakah Anda yakin perangkat ini telah selesai diperbaiki?')) {
                 allData = allData.map(item => {
@@ -137,7 +127,6 @@
             }
         }
 
-        // Fungsi Hapus Laporan
         function hapusLaporan(id) {
             if (confirm('Apakah Anda yakin ingin menghapus laporan ini secara permanen?')) {
                 allData = allData.filter(item => String(item.id) !== String(id));
@@ -146,7 +135,6 @@
             }
         }
 
-        // Logika Tombol Filter
         document.querySelectorAll('#filterBar button').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('#filterBar button').forEach(b => b.classList.remove('active'));
@@ -156,7 +144,6 @@
             });
         });
 
-        // Jalankan saat halaman dimuat
         renderLaporan();
     </script>
 </body>
