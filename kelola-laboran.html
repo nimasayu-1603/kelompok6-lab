@@ -3,33 +3,38 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>InventraLab - Beranda Laboran</title>
+    <title>InventraLab - Kelola Laporan</title>
     <link rel="stylesheet" href="style.css">
     <script>
         if (sessionStorage.getItem('isLoggedIn') !== 'true') window.location.href = 'login.html';
         if (sessionStorage.getItem('userRole') !== 'Laboran') window.location.href = 'login.html';
     </script>
+    <style>
+        .filter-bar { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+        .filter-bar button { padding:8px 14px; border-radius:99px; border:1px solid var(--line); background:var(--white); font-size:12px; font-weight:700; cursor:pointer; color:var(--muted); }
+        .filter-bar button.active { background:var(--blue); color:#fff; border-color:var(--blue); }
+        .btn-hapus { background:#fdeaea; color:var(--red); border:none; padding:8px 12px; border-radius:6px; cursor:pointer; font-weight:bold; font-size:12px; margin-left:8px; }
+    </style>
 </head>
 <body>
     <div id="appScreen" style="display:flex;">
         <header class="topbar">
             <div class="brand">
                 <div class="brand-logo" style="background:var(--navy);">IL</div>
-                <div class="brand-text">InventraLab <span style="background:var(--navy); color:white; font-size:10px; padding:2px 6px; border-radius:10px; margin-left:4px;">ADMIN</span></div>
+                <div class="brand-text">InventraLab</div>
             </div>
             <div class="user-info">
-                <div class="user-details"><strong>Laboran</strong><span>Admin</span></div>
                 <button onclick="sessionStorage.clear(); window.location.href='login.html';" class="btn-logout">LR</button>
             </div>
         </header>
         
         <nav class="nav-bar">
             <!-- 3 TOMBOL NAVIGASI -->
-            <a href="index-laboran.html" class="active">
+            <a href="index-laboran.html">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                 <span>Beranda</span>
             </a>
-            <a href="kelola-laporan.html">
+            <a href="kelola-laporan.html" class="active">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 <span>Kelola</span>
             </a>
@@ -40,28 +45,94 @@
         </nav>
 
         <main>
-            <div class="hero-card" style="background:var(--navy); color:white; margin-bottom:24px;">
-                <p class="eyebrow" style="color:#93c5fd;">PANEL ADMINISTRATOR</p>
-                <h1 style="color:white;">Selamat Datang, Laboran!</h1>
-                <p style="opacity:0.8; font-size:14px;">Tugas Anda adalah memverifikasi laporan siswa dan memperbarui status perbaikan perangkat.</p>
-                <a href="kelola-laporan.html" class="btn-primary" style="display:inline-flex; width:auto; margin-top:16px; background:white; color:var(--navy);">
-                    Buka Halaman Kelola
-                </a>
+            <div class="section-head">
+                <div>
+                    <p class="eyebrow">PANEL ADMIN</p>
+                    <h2>Kelola Laporan Siswa</h2>
+                </div>
             </div>
 
-            <div class="metrics">
-                <article><strong id="statTotal" style="color:var(--blue);">0</strong><span>Total Laporan</span></article>
-                <article><strong id="statPending" style="color:var(--orange);">0</strong><span>Belum Diperbaiki</span></article>
-                <article><strong id="statSelesai" style="color:var(--green);">0</strong><span>Selesai</span></article>
+            <div class="filter-bar" id="filterBar">
+                <button data-filter="all" class="active">Semua</button>
+                <button data-filter="Menunggu">Menunggu</button>
+                <button data-filter="Selesai">Selesai</button>
             </div>
+
+            <div id="laporanContainer" class="history-list" style="gap:16px;"></div>
         </main>
     </div>
 
     <script>
-        let data = JSON.parse(localStorage.getItem('inventraLabData')) || [];
-        document.getElementById('statTotal').innerText = data.length;
-        document.getElementById('statPending').innerText = data.filter(d => d.status === 'Menunggu').length;
-        document.getElementById('statSelesai').innerText = data.filter(d => d.status === 'Selesai').length;
+        let allData = JSON.parse(localStorage.getItem('inventraLabData')) || [];
+        let currentFilter = 'all';
+
+        function renderLaporan() {
+            const container = document.getElementById('laporanContainer');
+            let data = allData;
+            if (currentFilter !== 'all') {
+                data = data.filter(d => d.status === currentFilter);
+            }
+
+            if (data.length === 0) {
+                container.innerHTML = '<div style="text-align:center; padding:20px; color:var(--muted); background:white; border-radius:12px; border:1px solid var(--line);">Tidak ada laporan pada filter ini.</div>';
+                return;
+            }
+
+            let html = '';
+            data.forEach(item => {
+                let badge = item.status === 'Selesai' ? 'badge-good' : 'badge-warning';
+                let btnSelesai = item.status === 'Menunggu' ? `<button onclick="selesaikan('${item.id}')" style="background:var(--green); color:white; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; font-weight:bold; font-size:12px;">Tandai Selesai</button>` : `<span style="color:var(--green); font-weight:bold; font-size:12px;">✓ Sudah Selesai</span>`;
+                let btnHapus = `<button class="btn-hapus" onclick="hapusLaporan('${item.id}')">Hapus</button>`;
+
+                html += `
+                    <div class="history-item" style="display:flex; flex-direction:column; align-items:flex-start; gap:8px;">
+                        <div style="width:100%; display:flex; justify-content:space-between; align-items:center;">
+                            <div>
+                                <strong>${item.kode}</strong>
+                                <div style="font-size:12px; color:var(--muted); margin-top:2px;">Pelapor: ${item.nama}</div>
+                            </div>
+                            <span class="badge ${badge}">${item.status}</span>
+                        </div>
+                        <div style="background:var(--canvas); padding:10px; border-radius:8px; font-size:13px; width:100%; border:1px solid var(--line); margin-top:4px;">
+                            <strong>Kondisi:</strong> ${item.kondisi} | <strong>Lab:</strong> ${item.lab}<br>
+                            <strong>Catatan:</strong> ${item.catatan || '-'}
+                        </div>
+                        <div style="width:100%; display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+                            <div>${btnHapus}</div>
+                            <div>${btnSelesai}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function selesaikan(id) {
+            if (confirm('Apakah Anda yakin perangkat ini telah selesai diperbaiki?')) {
+                allData = allData.map(item => String(item.id) === String(id) ? { ...item, status: 'Selesai' } : item);
+                localStorage.setItem('inventraLabData', JSON.stringify(allData));
+                renderLaporan();
+            }
+        }
+
+        function hapusLaporan(id) {
+            if (confirm('Hapus laporan ini secara permanen?')) {
+                allData = allData.filter(item => String(item.id) !== String(id));
+                localStorage.setItem('inventraLabData', JSON.stringify(allData));
+                renderLaporan();
+            }
+        }
+
+        document.querySelectorAll('#filterBar button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('#filterBar button').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                renderLaporan();
+            });
+        });
+
+        renderLaporan();
     </script>
 </body>
 </html>
