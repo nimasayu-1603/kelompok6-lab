@@ -13,10 +13,7 @@
 <body style="display:flex; flex-direction:column; min-height:100vh; padding-bottom: 80px;">
     <div id="appScreen" style="display:flex; flex-direction:column; flex:1;">
         <header class="topbar">
-            <div class="brand">
-                <div class="brand-logo" style="background:var(--blue);">IL</div>
-                <div class="brand-text">InventraLab</div>
-            </div>
+            <div class="brand"><div class="brand-logo" style="background:var(--blue);">IL</div><div class="brand-text">InventraLab</div></div>
             <div class="user-info">
                 <div class="user-details"><strong>Kepala Jurusan</strong><span>Kajur</span></div>
                 <button onclick="sessionStorage.clear(); window.location.href='index.html';" class="btn-logout" title="Keluar">
@@ -24,7 +21,6 @@
                 </button>
             </div>
         </header>
-
         <nav class="nav-bar">
             <a href="index-kajur.html" class="active">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
@@ -39,7 +35,6 @@
                 <span>Tentang</span>
             </a>
         </nav>
-
         <main style="flex:1;">
             <div class="hero-card" style="margin-bottom: 24px;">
                 <p class="eyebrow">PANEL PIMPINAN</p>
@@ -47,10 +42,7 @@
                 <p class="lead">Pantau ringkasan kondisi dan laporan perbaikan secara keseluruhan. Halaman ini bersifat <i>Read-Only</i>.</p>
                 <a href="riwayat-kajur.html" class="btn-primary" style="display:inline-flex; width:auto;">Lihat Semua Laporan</a>
             </div>
-
-            <div class="section-head">
-                <h2>Ringkasan Laporan</h2>
-            </div>
+            <div class="section-head"><h2>Ringkasan Laporan</h2></div>
             <div class="metrics">
                 <article><strong id="statTotal" style="color:var(--blue);">0</strong><span>Total Laporan</span></article>
                 <article><strong id="statPending" style="color:var(--orange);">0</strong><span>Belum Diperbaiki</span></article>
@@ -58,11 +50,7 @@
             </div>
         </main>
     </div>
-    
-    <footer style="text-align:center; padding:20px; font-size:13px; color:var(--muted); border-top:1px solid var(--line); background:white; margin-bottom: 60px;">
-        Copyright &copy; 2026 - Kelompok 6
-    </footer>
-    
+    <footer style="text-align:center; padding:20px; font-size:13px; color:var(--muted); border-top:1px solid var(--line); background:white; margin-bottom: 60px;">Copyright &copy; 2026 - Kelompok 6</footer>
     <script>
         let data = JSON.parse(localStorage.getItem('inventraLabData')) || [];
         document.getElementById('statTotal').innerText = data.length;
