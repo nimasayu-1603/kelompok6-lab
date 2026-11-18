@@ -3,53 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>InventraLab</title>
+    <title>InventraLab - Beranda Siswa</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+        // Proteksi Ganda: Cek Login & Tendang Laboran
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') { window.location.href = 'login.html'; }
+        if (sessionStorage.getItem('userRole') === 'Laboran') { window.location.href = 'index-laboran.html'; }
+    </script>
 </head>
 <body>
-
-    <div id="loginScreen">
-        <div class="login-left">
-            <div style="background:#fff; color:#2563eb; font-size:32px; font-weight:900; padding:20px; border-radius:16px; margin-bottom:24px;">IL</div>
-            <h1 style="font-size:36px; margin-bottom:16px;">InventraLab</h1>
-            <p style="font-size:16px; opacity:0.9; max-width:400px;">Sistem pendataan inventaris. Kelola perangkat dengan mudah dan pantau kondisinya secara real-time.</p>
-        </div>
-        <div class="login-right">
-            <div class="login-box">
-                <div style="display:flex; align-items:center; gap:10px; margin-bottom:24px;" class="mobile-only">
-                    <div class="brand-logo">IL</div>
-                    <div class="brand-text">InventraLab</div>
-                </div>
-                <h2>Selamat Datang</h2>
-                <p>Silakan masuk untuk mengakses dasbor inventaris.</p>
-                
-                <form id="formLogin">
-                    <div id="loginError" class="error-msg">Username atau password salah!</div>
-                    <div class="input-group">
-                        <label>Username</label>
-                        <input type="text" id="username" required placeholder="Masukkan username">
-                    </div>
-                    <div class="input-group">
-                        <label>Password</label>
-                        <input type="password" id="password" required placeholder="Masukkan password">
-                    </div>
-                    <button type="submit" class="btn-login">Masuk ke Sistem</button>
-                </form>
-                
-                <div class="demo-accounts">
-                    <p>Akun Demo:</p>
-                    <ul>
-                        <li><b>Siswa RPL</b> : siswarpl / rpl123</li>
-                        <li><b>Siswa DKV</b> : siswadkv / dkv123</li>
-                        <li><b>Laboran</b> : laboran / laboran123</li>
-                        <li><b>Kepala Jurusan</b> : kepalajurusan / kajur123</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="appScreen">
+    <div id="appScreen" style="display:flex;">
         <header class="topbar">
             <div class="brand">
                 <div class="brand-logo">IL</div>
@@ -60,32 +23,29 @@
                     <strong id="userNameDisplay">User</strong>
                     <span id="userRoleDisplay">Role</span>
                 </div>
-                <button id="btnLogout" class="btn-logout">LR</button>
+                <!-- Logout ke login.html -->
+                <button onclick="sessionStorage.clear(); window.location.href='login.html';" class="btn-logout">LR</button>
             </div>
         </header>
 
         <nav class="nav-bar">
-            <a href="#" class="active">
+            <a href="index-siswa.html" class="active">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                 <span>Beranda</span>
             </a>
-            <a href="riwayat.html">
+            <a href="riwayat-siswa.html">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 <span>Riwayat</span>
             </a>
-            <a href="laporan.html">
+            <a href="laporan-siswa.html">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                 <span>Laporan</span>
             </a>
-            <a href="dashboard.html">
+            <a href="dashboard-siswa.html">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
                 <span>Dasbor</span>
             </a>
-            <a href="panduan.html">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                <span>Panduan</span>
-            </a>
-            <a href="kontak.html">
+            <a href="kontak-siswa.html">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                 <span>Kontak</span>
             </a>
@@ -97,130 +57,41 @@
                 <h1>Catat perangkat.<br><span>Update kondisinya.</span></h1>
                 <p class="lead">Sistem pendataan inventaris untuk mempermudah pelaporan kondisi perangkat komputer secara terpusat.</p>
                 
-                <a href="laporan.html" class="btn-primary" style="display:inline-flex; width:auto;">
+                <a href="laporan-siswa.html" class="btn-primary" style="display:inline-flex; width:auto;">
                     <svg style="width:18px; height:18px; margin-right:8px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                     Buat Laporan Baru
                 </a>
-
-                <div class="metrics">
-                    <article>
-                        <strong>248</strong>
-                        <span>Total perangkat</span>
-                    </article>
-                    <article>
-                        <strong style="color:var(--green);">194</strong>
-                        <span>Kondisi baik</span>
-                    </article>
-                    <article>
-                        <strong style="color:var(--red);">36</strong>
-                        <span>Perlu perbaikan</span>
-                    </article>
-                </div>
             </div>
 
             <div class="section-head">
                 <h2>Laporan Terakhir</h2>
-                <a href="riwayat.html" style="color:var(--blue); font-size:14px; font-weight:bold;">Lihat Semua</a>
+                <a href="riwayat-siswa.html" style="color:var(--blue); font-size:14px; font-weight:bold;">Lihat Semua</a>
             </div>
             <div id="recentHistory" class="history-list"></div>
         </main>
     </div>
 
     <script>
-        const users = {
-            'siswarpl': { pass: 'rpl123', name: 'Siswa RPL', role: 'Siswa RPL' },
-            'siswadkv': { pass: 'dkv123', name: 'Siswa DKV', role: 'Siswa DKV' },
-            'laboran': { pass: 'laboran123', name: 'Laboran', role: 'Laboran' },
-            'kepalajurusan': { pass: 'kajur123', name: 'Kepala Jurusan', role: 'Kepala Jurusan' }
-        };
+        document.getElementById('userNameDisplay').innerText = sessionStorage.getItem('userName') || 'User';
+        document.getElementById('userRoleDisplay').innerText = sessionStorage.getItem('userRole') || 'Role';
 
-        const dummyData = [
-            { id: 'dummy1', kode: 'LAB-01', nama: 'Budi Santoso', lab: 'Lab Komputer 1', kondisi: 'Baik', tanggal: '12 Nov 2026' },
-            { id: 'dummy2', kode: 'LAB-08', nama: 'Siti Aminah', lab: 'Lab Komputer 3', kondisi: 'Perlu Perbaikan', tanggal: '11 Nov 2026' }
-        ];
-
-        document.addEventListener('DOMContentLoaded', () => {
-            if (sessionStorage.getItem('isLoggedIn') === 'true') {
-                showApp(sessionStorage.getItem('userName'), sessionStorage.getItem('userRole'));
-            } else {
-                showLogin();
-            }
-        });
-
-        document.getElementById('formLogin').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const userIn = document.getElementById('username').value.toLowerCase().trim();
-            const passIn = document.getElementById('password').value;
-            const errorMsg = document.getElementById('loginError');
-            
-            if (users[userIn] && users[userIn].pass === passIn) {
-                errorMsg.style.display = 'none';
-                sessionStorage.setItem('isLoggedIn', 'true');
-                sessionStorage.setItem('userName', users[userIn].name);
-                sessionStorage.setItem('userRole', users[userIn].role);
-                showApp(users[userIn].name, users[userIn].role);
-            } else {
-                errorMsg.style.display = 'block';
-            }
-        });
-
-        document.getElementById('btnLogout').addEventListener('click', function() {
-            sessionStorage.clear();
-            showLogin();
-        });
-
-        function showApp(name, role) {
-            document.getElementById('loginScreen').style.display = 'none';
-            const app = document.getElementById('appScreen');
-            app.style.display = 'flex';
-            if(name) document.getElementById('userNameDisplay').innerText = name;
-            if(role) document.getElementById('userRoleDisplay').innerText = role;
-            renderRecentHistory();
-        }
-
-        function showLogin() {
-            document.getElementById('appScreen').style.display = 'none';
-            document.getElementById('loginScreen').style.display = 'flex';
-            document.getElementById('formLogin').reset();
-            document.getElementById('loginError').style.display = 'none';
-        }
-
-        function renderRecentHistory() {
-            const container = document.getElementById('recentHistory');
-            
-            // Cek penanda inisialisasi
-            const isInit = localStorage.getItem('isDataInit');
-            if (!isInit) {
-                localStorage.setItem('inventraLabData', JSON.stringify(dummyData));
-                localStorage.setItem('isDataInit', 'true');
-            }
-
-            let data = JSON.parse(localStorage.getItem('inventraLabData')) || [];
-
-            if (data.length === 0) {
-                container.innerHTML = '<div style="text-align:center; padding:20px; color:var(--muted); font-size:14px; background:white; border-radius:12px; border:1px solid var(--line);">Belum ada laporan terbaru.</div>';
-                return;
-            }
-
-            const recent = data.slice(0, 2);
+        // Render riwayat (Sama seperti kode sebelumnya)
+        let data = JSON.parse(localStorage.getItem('inventraLabData')) || [];
+        if(data.length > 0) {
             let html = '';
-            recent.forEach(item => {
-                let badgeClass = 'badge-good', iconClass = 'icon-good', iconChar = '✓';
-                if (item.kondisi === 'Perlu Perbaikan') { badgeClass = 'badge-warning'; iconClass = 'icon-warning'; iconChar = '◷'; }
-                else if (item.kondisi === 'Rusak' || item.kondisi === 'Hilang') { badgeClass = 'badge-danger'; iconClass = 'icon-danger'; iconChar = '!'; }
-
+            data.slice(0, 2).forEach(item => {
                 html += `
                     <article class="history-item">
-                        <span class="history-icon ${iconClass}">${iconChar}</span>
+                        <span class="history-icon icon-good">✓</span>
                         <div class="history-text">
                             <strong>${item.kode} · ${item.nama}</strong>
                             <small>${item.lab} · ${item.tanggal}</small>
                         </div>
-                        <span class="badge ${badgeClass}">${item.kondisi}</span>
+                        <span class="badge badge-good">${item.kondisi}</span>
                     </article>
                 `;
             });
-            container.innerHTML = html;
+            document.getElementById('recentHistory').innerHTML = html;
         }
     </script>
 </body>
