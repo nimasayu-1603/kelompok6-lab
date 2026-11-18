@@ -2,33 +2,50 @@
 <html lang="id">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>InventraLab - Siswa</title>
     <link rel="stylesheet" href="style.css">
     <script>
-        if (sessionStorage.getItem('isLoggedIn') !== 'true') window.location.href = 'login.html';
-        if (sessionStorage.getItem('userRole') !== 'Siswa') window.location.href = 'login.html';
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') window.location.href = 'index.html';
+        if (sessionStorage.getItem('userRole') !== 'Siswa') window.location.href = 'index.html';
     </script>
 </head>
-<body>
-    <div id="appScreen" style="display:flex;">
+<body style="display:flex; flex-direction:column; min-height:100vh; padding-bottom: 80px;">
+    <div id="appScreen" style="display:flex; flex-direction:column; flex:1;">
         <header class="topbar">
-            <div class="brand"><div class="brand-logo">IL</div><div class="brand-text">InventraLab</div></div>
+            <div class="brand"><div class="brand-logo" style="background:var(--blue);">IL</div><div class="brand-text">InventraLab</div></div>
             <div class="user-info">
-                <div class="user-details"><strong id="userNameDisplay">User</strong><span id="userRoleDisplay">Siswa</span></div>
-                <button onclick="sessionStorage.clear(); window.location.href='login.html';" class="btn-logout">LR</button>
+                <div class="user-details"><strong id="userNameDisplay">Siswa</strong><span>Siswa</span></div>
+                <button onclick="sessionStorage.clear(); window.location.href='index.html';" class="btn-logout" title="Keluar">
+                    <svg style="width:18px; height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                </button>
             </div>
         </header>
 
         <nav class="nav-bar">
-            <a href="index-siswa.html" class="active"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg><span>Beranda</span></a>
-            <a href="dashboard-siswa.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg><span>Dasbor</span></a>
-            <a href="laporan-siswa.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg><span>Laporan</span></a>
-            <a href="riwayat-siswa.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Riwayat</span></a>
-            <a href="panduan-siswa.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Panduan</span></a>
-            <a href="kontak-siswa.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg><span>Kontak</span></a>
+            <a href="index-siswa.html" class="active">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                <span>Beranda</span>
+            </a>
+            <a href="dashboard-siswa.html">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                <span>Dasbor</span>
+            </a>
+            <a href="laporan-siswa.html">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                <span>Laporan</span>
+            </a>
+            <a href="riwayat-siswa.html">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span>Riwayat</span>
+            </a>
+            <a href="about.html">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span>Tentang</span>
+            </a>
         </nav>
 
-        <main>
+        <main style="flex:1;">
             <div id="notifBanner" style="display:none; background:#e9f7ef; border:1px solid #a3e6b8; padding:16px; border-radius:12px; margin-bottom:20px; justify-content:space-between; align-items:center;">
                 <div>
                     <strong style="color:var(--green); font-size:14px;">📢 Laporan Anda Telah Selesai!</strong>
@@ -44,15 +61,21 @@
                 <a href="laporan-siswa.html" class="btn-primary" style="display:inline-flex; width:auto;">Buat Laporan Baru</a>
             </div>
 
-            <div class="section-head"><h2>Laporan Terakhir Anda</h2><a href="riwayat-siswa.html" style="color:var(--blue); font-size:14px; font-weight:bold;">Lihat Semua</a></div>
+            <div class="section-head">
+                <h2>Laporan Terakhir Anda</h2>
+                <a href="riwayat-siswa.html" style="color:var(--blue); font-size:14px; font-weight:bold;">Lihat Semua</a>
+            </div>
             <div id="recentHistory" class="history-list"></div>
         </main>
     </div>
+    
+    <footer style="text-align:center; padding:20px; font-size:13px; color:var(--muted); border-top:1px solid var(--line); background:white; margin-bottom: 60px;">
+        Copyright &copy; 2026 - Kelompok 6
+    </footer>
 
     <script>
         const currentUser = sessionStorage.getItem('userName');
         document.getElementById('userNameDisplay').innerText = currentUser;
-        document.getElementById('userRoleDisplay').innerText = 'Siswa ' + (currentUser.includes('DKV') ? 'DKV' : 'RPL');
         document.getElementById('heroName').innerText = currentUser;
 
         let data = JSON.parse(localStorage.getItem('inventraLabData')) || [];
