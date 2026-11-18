@@ -5,220 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>InventraLab - Kelola Laporan</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .filter-bar { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
-        .filter-bar button { padding:8px 14px; border-radius:99px; border:1px solid var(--line); background:var(--white); font-size:12px; font-weight:700; cursor:pointer; color:var(--muted); }
-        .filter-bar button.active { background:var(--blue); color:#fff; border-color:var(--blue); }
-        .admin-card { background:var(--white); border:1px solid var(--line); border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:12px; }
-        .admin-card .head { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
-        .admin-card .meta { font-size:12px; color:var(--muted); }
-        .admin-card .catatan { font-size:13px; color:var(--ink); background:var(--canvas); padding:10px; border-radius:8px; border:1px solid var(--line); }
-        .admin-actions { display:flex; gap:8px; flex-wrap:wrap; }
-        .btn-sm { padding:8px 12px; border-radius:8px; font-size:12px; font-weight:700; border:none; cursor:pointer; display:inline-flex; align-items:center; gap:6px; }
-        .btn-approve { background:#e9f7ef; color:var(--green); }
-        .btn-approve:hover { background:#c9ecd7; }
-        .btn-reject { background:#fdeaea; color:var(--red); }
-        .btn-reject:hover { background:#fbcaca; }
-        .btn-edit { background:var(--blue-soft); color:var(--blue); }
-        .btn-edit:hover { background:#dbeafe; }
-        .btn-del { background:#f3f4f6; color:var(--muted); }
-        .btn-del:hover { background:#fdeaea; color:var(--red); }
-        .modal-bg { position:fixed; inset:0; background:rgba(15,23,42,.5); display:none; align-items:center; justify-content:center; z-index:100; padding:16px; }
-        .modal-bg.show { display:flex; }
-        .modal-box { background:var(--white); border-radius:16px; padding:24px; width:100%; max-width:480px; max-height:90vh; overflow-y:auto; }
-        .modal-box h3 { margin-bottom:16px; font-size:18px; }
-    </style>
     <script>
-        if (sessionStorage.getItem('isLoggedIn') !== 'true') { window.location.href = 'index.html'; }
-        if (sessionStorage.getItem('userRole') !== 'Laboran') { window.location.href = 'dashboard.html'; }
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') window.location.href = 'login.html';
+        if (sessionStorage.getItem('userRole') !== 'Laboran') window.location.href = 'login.html';
     </script>
 </head>
 <body>
     <div id="appScreen" style="display:flex;">
         <header class="topbar">
             <div class="brand">
-                <div class="brand-logo">IL</div>
-                <div class="brand-text">InventraLab</div>
+                <div class="brand-logo" style="background:var(--navy);">IL</div>
+                <div class="brand-text">InventraLab <span style="background:var(--navy); color:white; font-size:10px; padding:2px 6px; border-radius:10px; margin-left:4px;">ADMIN</span></div>
             </div>
             <div class="user-info">
-                <div class="user-details">
-                    <strong id="userNameDisplay">User</strong>
-                    <span id="userRoleDisplay">Role</span>
-                </div>
-                <button onclick="sessionStorage.clear(); window.location.href='index.html';" class="btn-logout">LR</button>
+                <div class="user-details"><strong>Laboran</strong></div>
+                <button onclick="sessionStorage.clear(); window.location.href='login.html';" class="btn-logout">LR</button>
             </div>
         </header>
-
+        
         <nav class="nav-bar">
-            <a href="dashboard-admin.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg><span>Dasbor</span></a>
-            <a href="#" class="active"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Kelola</span></a>
-            <a href="data-perangkat.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg><span>Perangkat</span></a>
-            <a href="riwayat.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Riwayat</span></a>
-            <a href="panduan.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Panduan</span></a>
+            <!-- Navigasi mengarah ke file ini sendiri dan dashboard -->
+            <a href="kelola-laboran.html" class="active"><span>Kelola Laporan</span></a>
+            <a href="dashboard-laboran.html"><span>Dasbor</span></a>
         </nav>
 
         <main>
             <div class="section-head">
                 <div>
-                    <p class="eyebrow">ADMINISTRATOR</p>
-                    <h2>Kelola Laporan</h2>
+                    <p class="eyebrow">PANEL ADMIN</p>
+                    <h2>Kelola Laporan Siswa</h2>
                 </div>
-                <a href="laporan.html" style="color:var(--blue);font-size:14px;font-weight:bold;">+ Tambah</a>
             </div>
+            <p style="color:var(--muted); margin-bottom:20px; font-size:14px;">Ubah status menjadi "Selesai" jika perangkat sudah diperbaiki.</p>
 
-            <div class="filter-bar" id="filterBar">
-                <button data-filter="all" class="active">Semua</button>
-                <button data-filter="Menunggu">Menunggu</button>
-                <button data-filter="Disetujui">Disetujui</button>
-                <button data-filter="Ditolak">Ditolak</button>
-                <button data-filter="Selesai">Selesai</button>
-            </div>
-
-            <div id="laporanList" class="history-list" style="gap:16px;"></div>
+            <div id="laporanContainer" class="history-list" style="gap:16px;"></div>
         </main>
     </div>
 
-    <!-- Modal Edit -->
-    <div class="modal-bg" id="editModal">
-        <div class="modal-box">
-            <h3>Edit Laporan</h3>
-            <form id="formEdit" style="display:flex;flex-direction:column;gap:14px;">
-                <input type="hidden" id="editId">
-                <div class="field"><label>Nama</label><input id="editNama" required></div>
-                <div class="field"><label>Lab</label>
-                    <select id="editLab">
-                        <option>Lab Komputer 1</option><option>Lab Komputer 2</option><option>Lab Komputer 3</option>
-                        <option>Lab Komputer 4</option><option>Lab Komputer 5</option><option>Lab Komputer 6</option>
-                        <option>Lab Komputer 7</option><option>Lab Komputer 8</option><option>Lab Komputer 9</option>
-                        <option>Lab Komputer 10</option>
-                    </select>
-                </div>
-                <div class="field"><label>Kode Perangkat</label><input id="editKode" required></div>
-                <div class="field"><label>Kondisi</label>
-                    <select id="editKondisi">
-                        <option>Baik</option><option>Perlu Perbaikan</option><option>Rusak</option><option>Hilang</option>
-                    </select>
-                </div>
-                <div class="field"><label>Catatan</label><textarea id="editCatatan"></textarea></div>
-                <div style="display:flex;gap:8px;justify-content:flex-end;">
-                    <button type="button" class="btn-secondary" onclick="tutupModal()">Batal</button>
-                    <button type="submit" class="btn-primary" style="width:auto;">Simpan</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <script>
-        document.getElementById('userNameDisplay').innerText = sessionStorage.getItem('userName') || 'Laboran';
-        document.getElementById('userRoleDisplay').innerText = sessionStorage.getItem('userRole') || 'Laboran';
+        function tampilkanLaporan() {
+            const container = document.getElementById('laporanContainer');
+            let data = JSON.parse(localStorage.getItem('inventraLabData')) || [];
 
-        let currentFilter = 'all';
-
-        function getData() {
-            return JSON.parse(localStorage.getItem('inventraLabData')) || [];
-        }
-        function setData(data) {
-            localStorage.setItem('inventraLabData', JSON.stringify(data));
-        }
-
-        function badgeFor(status) {
-            if (status === 'Disetujui') return 'badge-good';
-            if (status === 'Ditolak') return 'badge-danger';
-            if (status === 'Selesai') return 'badge-good';
-            return 'badge-warning';
-        }
-
-        function renderLaporan() {
-            let data = getData();
-            if (currentFilter !== 'all') {
-                data = data.filter(d => (d.status || 'Menunggu') === currentFilter);
-            }
-            const container = document.getElementById('laporanList');
             if (data.length === 0) {
-                container.innerHTML = '<div style="text-align:center;padding:32px;background:white;border-radius:12px;border:1px solid var(--line);color:var(--muted);font-size:14px;">Tidak ada laporan pada filter ini.</div>';
+                container.innerHTML = '<div style="text-align:center; padding:20px; color:var(--muted); background:white; border-radius:12px; border:1px solid var(--line);">Belum ada laporan dari siswa.</div>';
                 return;
             }
-            container.innerHTML = data.map(item => {
-                const status = item.status || 'Menunggu';
-                return `
-                <div class="admin-card">
-                    <div class="head">
-                        <div>
-                            <strong style="font-size:14px;">${item.kode} · ${item.nama}</strong>
-                            <div class="meta">${item.lab} · ${item.tanggal} · ${item.peran || '-'}</div>
+
+            let html = '';
+            data.forEach(item => {
+                let badge = item.status === 'Selesai' ? 'badge-good' : 'badge-warning';
+                
+                let btn = '';
+                if(item.status === 'Menunggu') {
+                    btn = `<button onclick="selesaikan('${item.id}')" style="background:var(--green); color:white; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; font-weight:bold; font-size:12px;">Tandai Selesai</button>`;
+                } else {
+                    btn = `<span style="color:var(--green); font-weight:bold; font-size:12px;">✓ Sudah Diperbaiki</span>`;
+                }
+
+                html += `
+                    <div class="history-item" style="display:flex; flex-direction:column; align-items:flex-start; gap:8px;">
+                        <div style="width:100%; display:flex; justify-content:space-between; align-items:center;">
+                            <div>
+                                <strong>${item.kode}</strong>
+                                <div style="font-size:12px; color:var(--muted); margin-top:2px;">Pelapor: ${item.nama} (${item.peran})</div>
+                            </div>
+                            <span class="badge ${badge}">${item.status}</span>
                         </div>
-                        <span class="badge ${badgeFor(status)}">${status}</span>
+                        <div style="background:var(--canvas); padding:10px; border-radius:8px; font-size:13px; width:100%; border:1px solid var(--line); margin-top:4px;">
+                            <strong>Kondisi:</strong> ${item.kondisi} | <strong>Lab:</strong> ${item.lab}<br>
+                            <strong>Catatan:</strong> ${item.catatan || '-'}
+                        </div>
+                        <div style="width:100%; display:flex; justify-content:flex-end; margin-top:4px;">
+                            ${btn}
+                        </div>
                     </div>
-                    <div class="catatan">
-                        <strong>Kondisi:</strong> ${item.kondisi}<br>
-                        ${item.catatan ? '<strong>Catatan:</strong> ' + item.catatan : '<em>Tidak ada catatan.</em>'}
-                    </div>
-                    <div class="admin-actions">
-                        ${status === 'Menunggu' ? `
-                            <button class="btn-sm btn-approve" onclick="ubahStatus('${item.id}','Disetujui')">✓ Setujui</button>
-                            <button class="btn-sm btn-reject" onclick="ubahStatus('${item.id}','Ditolak')">✕ Tolak</button>
-                        ` : ''}
-                        ${status === 'Disetujui' ? `
-                            <button class="btn-sm btn-approve" onclick="ubahStatus('${item.id}','Selesai')">✓ Tandai Selesai</button>
-                        ` : ''}
-                        <button class="btn-sm btn-edit" onclick="bukaEdit('${item.id}')">✎ Edit</button>
-                        <button class="btn-sm btn-del" onclick="hapusLaporan('${item.id}')">🗑 Hapus</button>
-                    </div>
-                </div>`;
-            }).join('');
-        }
-
-        function ubahStatus(id, status) {
-            const data = getData().map(d => String(d.id) === String(id) ? { ...d, status } : d);
-            setData(data);
-            renderLaporan();
-        }
-
-        function hapusLaporan(id) {
-            if (!confirm('Hapus laporan ini secara permanen?')) return;
-            setData(getData().filter(d => String(d.id) !== String(id)));
-            renderLaporan();
-        }
-
-        function bukaEdit(id) {
-            const item = getData().find(d => String(d.id) === String(id));
-            if (!item) return;
-            document.getElementById('editId').value = item.id;
-            document.getElementById('editNama').value = item.nama;
-            document.getElementById('editLab').value = item.lab;
-            document.getElementById('editKode').value = item.kode;
-            document.getElementById('editKondisi').value = item.kondisi;
-            document.getElementById('editCatatan').value = item.catatan || '';
-            document.getElementById('editModal').classList.add('show');
-        }
-        function tutupModal() { document.getElementById('editModal').classList.remove('show'); }
-
-        document.getElementById('formEdit').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const id = document.getElementById('editId').value;
-            const data = getData().map(d => String(d.id) === String(id) ? {
-                ...d,
-                nama: document.getElementById('editNama').value,
-                lab: document.getElementById('editLab').value,
-                kode: document.getElementById('editKode').value,
-                kondisi: document.getElementById('editKondisi').value,
-                catatan: document.getElementById('editCatatan').value
-            } : d);
-            setData(data);
-            tutupModal();
-            renderLaporan();
-        });
-
-        document.querySelectorAll('#filterBar button').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('#filterBar button').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentFilter = btn.dataset.filter;
-                renderLaporan();
+                `;
             });
-        });
+            container.innerHTML = html;
+        }
 
-        renderLaporan();
+        function selesaikan(id) {
+            if (confirm('Apakah Anda yakin perangkat ini telah selesai diperbaiki?')) {
+                let data = JSON.parse(localStorage.getItem('inventraLabData')) || [];
+                data = data.map(item => {
+                    if (String(item.id) === String(id)) return { ...item, status: 'Selesai' };
+                    return item;
+                });
+                localStorage.setItem('inventraLabData', JSON.stringify(data));
+                tampilkanLaporan();
+            }
+        }
+
+        tampilkanLaporan();
     </script>
 </body>
 </html>
