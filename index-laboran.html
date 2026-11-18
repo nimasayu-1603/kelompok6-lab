@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>InventraLab - Beranda Laboran</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Proteksi: Hanya untuk Laboran
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') { window.location.href = 'login.html'; }
+        if (sessionStorage.getItem('userRole') !== 'Laboran') { window.location.href = 'index-siswa.html'; }
+    </script>
+</head>
+<body>
+    <div id="appScreen" style="display:flex;">
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-logo" style="background:var(--navy);">IL</div>
+                <div class="brand-text">InventraLab <span style="background:var(--navy); color:white; font-size:10px; padding:2px 6px; border-radius:10px; margin-left:5px;">ADMIN</span></div>
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                    <strong id="userNameDisplay">Laboran</strong>
+                    <span id="userRoleDisplay">Laboran</span>
+                </div>
+                <button onclick="sessionStorage.clear(); window.location.href='login.html';" class="btn-logout">LR</button>
+            </div>
+        </header>
+
+        <nav class="nav-bar">
+            <a href="index-laboran.html" class="active">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                <span>Beranda</span>
+            </a>
+            <!-- MENU KHUSUS LABORAN -->
+            <a href="kelola-laporan.html">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span>Verifikasi</span>
+            </a>
+            <a href="dashboard-laboran.html">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                <span>Dasbor</span>
+            </a>
+        </nav>
+
+        <main>
+            <div class="hero-card" style="margin-bottom: 24px; background:var(--blue-soft); border-color:#bfdbfe;">
+                <p class="eyebrow">PANEL ADMINISTRATOR</p>
+                <h1>Selamat Datang,<br><span>Laboran.</span></h1>
+                <p class="lead">Di sini Anda dapat memverifikasi laporan kerusakan dari siswa dan memperbarui status perbaikan perangkat.</p>
+                
+                <a href="kelola-laporan.html" class="btn-primary" style="display:inline-flex; width:auto;">
+                    <svg style="width:18px; height:18px; margin-right:8px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Kelola Laporan Masuk
+                </a>
+            </div>
+
+            <div class="metrics">
+                <article>
+                    <strong id="statTotal" style="color:var(--blue);">0</strong>
+                    <span>Total Laporan</span>
+                </article>
+                <article>
+                    <strong id="statPending" style="color:var(--orange);">0</strong>
+                    <span>Belum Diperbaiki</span>
+                </article>
+                <article>
+                    <strong id="statSelesai" style="color:var(--green);">0</strong>
+                    <span>Telah Diperbaiki</span>
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('userNameDisplay').innerText = sessionStorage.getItem('userName') || 'Laboran';
+        
+        // Hitung statistik
+        const data = JSON.parse(localStorage.getItem('inventraLabData')) || [];
+        document.getElementById('statTotal').innerText = data.length;
+        
+        // Asumsi: laporan baru belum punya status, atau statusnya 'Pending'
+        let pending = data.filter(d => !d.status || d.status === 'Pending').length;
+        // Asumsi: laporan yang sudah diupdate laboran statusnya jadi 'Selesai'
+        let selesai = data.filter(d => d.status === 'Selesai').length;
+        
+        document.getElementById('statPending').innerText = pending;
+        document.getElementById('statSelesai').innerText = selesai;
+    </script>
+</body>
+</html>
