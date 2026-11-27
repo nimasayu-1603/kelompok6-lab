@@ -2,37 +2,112 @@
 <html lang="id">
 <head>
     <meta charset="utf-8">
-    <title>InventraLab - Kontak</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>InventraLab - Tentang & Kontak</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body { display: flex; flex-direction: column; min-height: 100vh; margin: 0; background: var(--canvas); }
+        
+        /* CSS Navbar Atas */
+        .nav-bar-top { display: flex; justify-content: center; gap: 8px; padding: 16px; background: var(--white); border-bottom: 1px solid var(--line); }
+        .nav-bar-top a { padding: 8px 16px; text-decoration: none; color: var(--muted); font-weight: 600; font-size: 14px; border-radius: 8px; transition: 0.2s; }
+        .nav-bar-top a:hover { background: var(--canvas); color: var(--ink); }
+        .nav-bar-top a.active { background: var(--blue-soft); color: var(--blue); }
+
+        /* Container Utama */
+        .container { max-width: 800px; margin: 30px auto; width: 90%; }
+        
+        /* Card Info Aplikasi */
+        .info-card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); text-align: center; }
+        .info-card h2 { font-size: 22px; color: var(--blue); margin-bottom: 12px; }
+        .info-card p { font-size: 14px; color: var(--ink); line-height: 1.6; max-width: 600px; margin: 0 auto; }
+        
+        /* Grid Kontak */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+        
+        .contact-card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 24px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .contact-card h3 { font-size: 18px; color: var(--ink); margin-bottom: 4px; }
+        .contact-card .role { font-size: 13px; color: var(--blue); font-weight: 600; margin-bottom: 16px; display: block; }
+        .contact-card p { font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+        
+        footer { text-align: center; padding: 20px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); background: white; margin-top: auto; }
+    </style>
     <script>
-        if (sessionStorage.getItem('isLoggedIn') !== 'true') window.location.href = 'login.html';
-        if (sessionStorage.getItem('userRole') !== 'Siswa') window.location.href = 'login.html';
+        // Cek Login
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'index.html';
+        }
     </script>
 </head>
 <body>
-    <div id="appScreen" style="display:flex;">
+    <div id="appScreen" style="display:flex; flex-direction:column; flex:1;">
+        <!-- HEADER ATAS -->
         <header class="topbar">
-            <div class="brand"><div class="brand-logo">IL</div><div class="brand-text">InventraLab</div></div>
-            <div class="user-info"><button onclick="sessionStorage.clear(); window.location.href='login.html';" class="btn-logout">LR</button></div>
+            <div class="brand"><div class="brand-logo" style="background:var(--blue);">IL</div><div class="brand-text">InventraLab</div></div>
+            <div class="user-info" id="userInfoArea"></div>
         </header>
-        <nav class="nav-bar">
-            <a href="index-siswa.html"><span>Beranda</span></a>
-            <a href="dashboard-siswa.html"><span>Dasbor</span></a>
-            <a href="laporan-siswa.html"><span>Laporan</span></a>
-            <a href="riwayat-siswa.html"><span>Riwayat</span></a>
-            <a href="panduan-siswa.html"><span>Panduan</span></a>
-            <a href="kontak-siswa.html" class="active"><span>Kontak</span></a>
+
+        <!-- NAVBAR ATAS -->
+        <nav class="nav-bar-top">
+            <a href="index-siswa.html">Beranda</a>
+            <a href="dashboard-siswa.html">Dasbor</a>
+            <a href="laporan-siswa.html">Laporan</a>
+            <a href="riwayat-siswa.html">Riwayat</a>
+            <!-- Diarahkan ke file ini sendiri dengan status active -->
+            <a href="kontak-siswa.html" class="active">Tentang</a>
         </nav>
-        <main>
-            <h2>Hubungi Kami</h2>
-            <div class="history-list" style="margin-top:16px; gap:16px;">
-                <article class="history-item" style="display:block;">
-                    <h3 style="color:var(--blue); margin-bottom:8px;">Laboran Lab Komputer</h3>
-                    <p style="font-size:14px; color:var(--muted); margin-bottom:8px;">Untuk kendala teknis perbaikan perangkat.</p>
-                    <div style="background:var(--canvas); padding:12px; border-radius:8px; font-size:14px;"><b>Telepon:</b> (021) 555-0182<br><b>Jam Kerja:</b> Senin–Jumat, 08.00–16.00 WIB</div>
-                </article>
+
+        <main style="flex:1; padding: 20px;">
+            <div class="container">
+                
+                <!-- Info Aplikasi -->
+                <div class="info-card">
+                    <h2>Tentang Aplikasi</h2>
+                    <p><b>InventraLab</b> adalah Sistem Laporan Cepat Inventaris Laboratorium. Aplikasi ini memudahkan siswa melaporkan kerusakan perangkat secara <i>real-time</i>, serta membantu Laboran dan Kepala Jurusan dalam mengelola data perbaikan secara terpusat.</p>
+                </div>
+
+                <!-- Kontak Pengelola -->
+                <h2 style="font-size: 18px; color: var(--ink); margin-bottom: 16px; text-align: center;">Informasi & Kontak Pengelola Lab</h2>
+                <div class="contact-grid">
+                    
+                    <!-- Kontak Laboran -->
+                    <div class="contact-card">
+                        <h3>Bapak Laboran</h3>
+                        <span class="role">Pengelola Laboratorium</span>
+                        <p>Telp: 0812-3456-7890</p>
+                        <p>Email: laboran@sekolah.sch.id</p>
+                        <a href="https://wa.me/6281234567890" target="_blank" style="display:inline-block; background:#25D366; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; font-size:14px; font-weight:bold; margin-top:12px;">Chat via WA</a>
+                    </div>
+
+                    <!-- Kontak Kajur -->
+                    <div class="contact-card">
+                        <h3>Ibu Kepala Jurusan</h3>
+                        <span class="role">Pimpinan Jurusan</span>
+                        <p>Telp: 0898-7654-3210</p>
+                        <p>Email: kajur@sekolah.sch.id</p>
+                        <a href="https://wa.me/6289876543210" target="_blank" style="display:inline-block; background:#25D366; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; font-size:14px; font-weight:bold; margin-top:12px;">Chat via WA</a>
+                    </div>
+
+                </div>
             </div>
         </main>
+        
+        <footer>Copyright &copy; 2026 - Kelompok 6</footer>
     </div>
+
+    <script>
+        const userName = sessionStorage.getItem('userName');
+        const role = sessionStorage.getItem('userRole');
+        const userInfoArea = document.getElementById('userInfoArea');
+
+        // Render Tombol Logout
+        userInfoArea.innerHTML = `
+            <div class="user-details"><strong>${userName}</strong><span>${role}</span></div>
+            <button onclick="sessionStorage.clear(); window.location.href='index.html';" class="btn-logout" title="Keluar">
+                <svg style="width:18px; height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+            </button>
+        `;
+    </script>
 </body>
 </html>
