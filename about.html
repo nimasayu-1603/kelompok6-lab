@@ -13,24 +13,24 @@
             .mobile-logo .brand-logo { font-size: 28px; padding: 16px; border-radius: 16px; margin-bottom: 12px; }
         }
         
-        /* Gaya tombol About Us dengan warna abu-abu netral */
+        /* Gaya tombol About Us warna abu-abu */
         .btn-outline {
             display: block;
             width: 100%;
             padding: 12px;
             text-align: center;
-            border: 1px solid var(--line); /* Garis abu-abu tipis */
-            color: var(--ink); /* Teks warna gelap */
-            background: var(--canvas); /* Latar abu-abu sangat terang */
+            border: none; /* Menghilangkan garis tepi */
+            color: var(--blue); /* Teks tetap biru agar nyambung dengan tema */
+            background: #f1f5f9; /* Warna abu-abu terang (mirip kotak demo) */
             border-radius: 8px;
-            font-weight: 600;
+            font-weight: 700; /* Dibuat agak tebal agar jelas */
             font-size: 14px;
             text-decoration: none;
             transition: all 0.2s ease;
             box-sizing: border-box;
         }
         .btn-outline:hover {
-            background: var(--line); /* Sedikit lebih gelap saat di-hover */
+            background: #e2e8f0; /* Sedikit lebih gelap saat di-hover */
         }
     </style>
     <script>
@@ -75,7 +75,7 @@
                     <button type="submit" class="btn-login">Masuk ke Sistem</button>
                 </form>
                 
-                <!-- TOMBOL TENTANG KAMI DENGAN WARNA BARU -->
+                <!-- TOMBOL TENTANG KAMI WARNA ABU-ABU -->
                 <div style="margin-top: 16px;">
                     <a href="about.html" class="btn-outline">Tentang Kami (About Us)</a>
                 </div>
