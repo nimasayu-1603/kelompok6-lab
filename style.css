@@ -329,3 +329,12 @@ main { padding: 24px 16px; max-width: 800px; margin: 0 auto; width: 100%; }
   .form-actions { grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: 12px; }
   .form-actions button, .form-actions a { width: auto; }
 }
+nav.nav-bar a svg {
+    width: 20px;
+    height: 20px;
+    display: block; 
+}
+
+nav.nav-bar a.active svg {
+    stroke: var(--blue);
+}
