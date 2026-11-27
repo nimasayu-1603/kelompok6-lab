@@ -5,41 +5,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>InventraLab - Dasbor Siswa</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body { display: flex; flex-direction: column; min-height: 100vh; margin: 0; background: var(--canvas); }
+        
+        /* CSS Navbar Atas yang Rapi & Berikon */
+        .nav-bar-top { display: flex; justify-content: center; gap: 8px; padding: 16px; background: var(--white); border-bottom: 1px solid var(--line); }
+        .nav-bar-top a { display: flex; align-items: center; gap: 8px; padding: 10px 20px; text-decoration: none; color: var(--muted); font-weight: 600; font-size: 14px; border-radius: 8px; transition: 0.2s; }
+        .nav-bar-top a svg { width: 18px; height: 18px; }
+        .nav-bar-top a:hover { background: var(--canvas); color: var(--ink); }
+        .nav-bar-top a.active { background: var(--blue-soft); color: var(--blue); }
+
+        /* Container Utama */
+        .container { max-width: 800px; margin: 30px auto; width: 90%; }
+        
+        /* Card Dasbor */
+        .dash-card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .dash-card h2 { font-size: 22px; color: var(--ink); margin-bottom: 8px; }
+        .dash-card p { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+        @media (max-width: 768px) { .stats-grid { grid-template-columns: 1fr; } }
+        
+        .stat-box { background: var(--canvas); border: 1px solid var(--line); padding: 20px; border-radius: 12px; text-align: center; }
+        .stat-box h3 { font-size: 28px; color: var(--blue); margin-bottom: 4px; }
+        .stat-box p { font-size: 13px; margin: 0; }
+        
+        footer { text-align: center; padding: 20px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); background: white; margin-top: auto; }
+    </style>
     <script>
-        if (sessionStorage.getItem('isLoggedIn') !== 'true') window.location.href = 'index.html';
-        if (sessionStorage.getItem('userRole') !== 'Siswa') window.location.href = 'index.html';
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'index.html';
+        }
     </script>
 </head>
-<body style="display:flex; flex-direction:column; min-height:100vh; padding-bottom: 80px;">
+<body>
     <div id="appScreen" style="display:flex; flex-direction:column; flex:1;">
+        <!-- HEADER ATAS -->
         <header class="topbar">
             <div class="brand"><div class="brand-logo" style="background:var(--blue);">IL</div><div class="brand-text">InventraLab</div></div>
-            <div class="user-info"><button onclick="sessionStorage.clear(); window.location.href='index.html';" class="btn-logout"><svg style="width:18px; height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg></button></div>
+            <div class="user-info" id="userInfoArea"></div>
         </header>
-        <nav class="nav-bar">
-            <a href="index-siswa.html"><span>Beranda</span></a>
-            <a href="dashboard-siswa.html" class="active"><span>Dasbor</span></a>
-            <a href="laporan-siswa.html"><span>Laporan</span></a>
-            <a href="riwayat-siswa.html"><span>Riwayat</span></a>
-            <a href="kontak-siswa.html"><span>Kontak</span></a>
+
+        <!-- NAVBAR ATAS SERAGAM -->
+        <nav class="nav-bar-top">
+            <a href="index-siswa.html">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                Beranda
+            </a>
+            <a href="dashboard-siswa.html" class="active">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                Dasbor
+            </a>
+            <a href="laporan-siswa.html">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                Laporan
+            </a>
+            <a href="riwayat-siswa.html">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Riwayat
+            </a>
+            <a href="kontak-siswa.html">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Kontak
+            </a>
         </nav>
-        <main style="flex:1;">
-            <div class="section-title"><p class="eyebrow">RINGKASAN PRIBADI</p><h2>Dasbor Siswa</h2></div>
-            <div class="metrics">
-                <article><strong id="statTotal" style="color:var(--blue);">0</strong><span>Laporan Anda</span></article>
-                <article><strong id="statPending" style="color:var(--orange);">0</strong><span>Menunggu</span></article>
-                <article><strong id="statSelesai" style="color:var(--green);">0</strong><span>Selesai</span></article>
+
+        <main style="flex:1; padding: 20px;">
+            <div class="container">
+                <div class="dash-card">
+                    <h2>Dasbor Siswa</h2>
+                    <p>Selamat datang di halaman dasbor. Berikut adalah ringkasan aktivitas laporan Anda.</p>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <h3>0</h3>
+                            <p>Laporan Menunggu</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3>0</h3>
+                            <p>Sedang Diperbaiki</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3>0</h3>
+                            <p>Selesai</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
+        
+        <footer>Copyright &copy; 2026 - Kelompok 6</footer>
     </div>
-    <footer style="text-align:center; padding:20px; font-size:13px; color:var(--muted); border-top:1px solid var(--line); background:white; margin-bottom: 60px;">Copyright &copy; 2026 - Kelompok 6</footer>
+
     <script>
-        const currentUser = sessionStorage.getItem('userName');
-        let data = JSON.parse(localStorage.getItem('inventraLabData')) || [];
-        const myData = data.filter(item => item.nama === currentUser);
-        document.getElementById('statTotal').innerText = myData.length;
-        document.getElementById('statPending').innerText = myData.filter(d => d.status === 'Menunggu').length;
-        document.getElementById('statSelesai').innerText = myData.filter(d => d.status === 'Selesai').length;
+        const userName = sessionStorage.getItem('userName');
+        const role = sessionStorage.getItem('userRole');
+        const userInfoArea = document.getElementById('userInfoArea');
+
+        userInfoArea.innerHTML = `
+            <div class="user-details"><strong>${userName}</strong><span>${role}</span></div>
+            <button onclick="sessionStorage.clear(); window.location.href='index.html';" class="btn-logout" title="Keluar">
+                <svg style="width:18px; height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+            </button>
+        `;
     </script>
 </body>
 </html>
