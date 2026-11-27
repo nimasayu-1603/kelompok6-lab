@@ -29,15 +29,37 @@
         .member-card .role { font-size: 12px; color: var(--blue); font-weight: 600; background: var(--white); padding: 4px 10px; border-radius: 99px; display: inline-block; margin-top: 4px; }
         .member-card p { font-size: 13px; color: var(--muted); margin-top: 8px; line-height: 1.4; }
 
-        .btn-kembali { display: inline-block; margin-top: 16px; padding: 12px 24px; background: var(--blue); color: white; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 14px; transition: 0.2s; text-align: center; width: 100%; box-sizing: border-box; }
-        .btn-kembali:hover { background: var(--blue-hover); }
+        /* CSS Khusus Tombol di Navbar */
+        .btn-nav-login { 
+            display: inline-block; 
+            padding: 8px 16px; 
+            background: transparent; 
+            color: var(--blue); 
+            border: 2px solid var(--blue); 
+            border-radius: 8px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 13px; 
+            transition: 0.2s; 
+        }
+        .btn-nav-login:hover { 
+            background: var(--blue); 
+            color: white; 
+        }
     </style>
 </head>
 <body>
     <div id="appScreen" style="display:flex; flex-direction:column; flex:1;">
-        <!-- HEADER ATAS -->
+        <!-- HEADER ATAS (Dengan Tombol Kembali di Kanan) -->
         <header class="topbar">
-            <div class="brand"><div class="brand-logo" style="background:var(--blue);">IL</div><div class="brand-text">InventraLab</div></div>
+            <div class="brand">
+                <div class="brand-logo" style="background:var(--blue);">IL</div>
+                <div class="brand-text">InventraLab</div>
+            </div>
+            <div class="user-info">
+                <!-- Tombol Pindah ke Kanan Atas -->
+                <a href="index.html" class="btn-nav-login">Kembali ke Login</a>
+            </div>
         </header>
 
         <main style="flex:1; padding: 20px;">
@@ -83,47 +105,36 @@
                     <p class="subtitle">Anggota dan pembagian tugas dalam pembuatan proyek ini.</p>
                     
                     <div class="team-grid">
-                        <!-- 1. Pemandu Diskusi -->
                         <div class="member-card">
                             <div class="member-avatar">R</div>
                             <h3>Renita Putri Lestari</h3>
                             <span class="role">Pemandu Diskusi</span>
                             <p>Membuat repo dari template, mengundang anggota, memastikan semua halaman masuk.</p>
                         </div>
-
-                        <!-- 2. Pencatat -->
                         <div class="member-card">
                             <div class="member-avatar">S</div>
                             <h3>Siham Tri Anggi</h3>
                             <span class="role">Pencatat</span>
                             <p>Menyalin Kanvas Konsep Produk ke file README.md.</p>
                         </div>
-
-                        <!-- 3. Penjaga Waktu -->
                         <div class="member-card">
                             <div class="member-avatar">N</div>
                             <h3>Nimasayu Lintang Kosasih</h3>
                             <span class="role">Penjaga Waktu</span>
                             <p>Membuat Issues (satu tugas per halaman) dan memantau semuanya tertutup.</p>
                         </div>
-
-                        <!-- 4. Penanya Kritis -->
                         <div class="member-card">
                             <div class="member-avatar">A</div>
                             <h3>Ameliya Putri Cahyani</h3>
                             <span class="role">Penanya Kritis</span>
                             <p>Memberi komentar "Bagaimana jika ...?" pada commit teman, mencocokkan dengan kanvas.</p>
                         </div>
-
-                        <!-- 5. Juru Bicara -->
                         <div class="member-card">
                             <div class="member-avatar">E</div>
                             <h3>Elisa Febriani</h3>
                             <span class="role">Juru Bicara</span>
                             <p>Menulis tanggapan di repository kelompok peninjau dan menyampaikan konsep kelompok.</p>
                         </div>
-
-                        <!-- 6. Pengembang Front-End -->
                         <div class="member-card">
                             <div class="member-avatar">F</div>
                             <h3>Faneza Dyra Efendy</h3>
@@ -131,11 +142,6 @@
                             <p>Mengurus index.html dan style.css, menyalakan GitHub Pages, membantu teman yang macet.</p>
                         </div>
                     </div>
-                </div>
-
-                <!-- Tombol Kembali -->
-                <div style="max-width: 300px; margin: 0 auto;">
-                    <a href="index.html" class="btn-kembali">Kembali ke Login</a>
                 </div>
 
             </div>
