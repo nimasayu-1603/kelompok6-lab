@@ -3,114 +3,172 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>InventraLab - Login</title>
+    <title>InventraLab - Tentang Kami</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        @media (max-width: 768px) {
-            .login-left { display: none !important; }
-            .login-right { padding: 20px; width: 100%; }
-            .mobile-logo { display: flex !important; flex-direction: column; align-items: center; margin-bottom: 24px; text-align: center; }
-            .mobile-logo .brand-logo { font-size: 28px; padding: 16px; border-radius: 16px; margin-bottom: 12px; }
+        body { 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+            margin: 0;
+            padding-bottom: 90px; 
+            box-sizing: border-box;
+        }
+        
+        .about-hero { text-align: center; padding: 40px 20px; background: var(--blue-soft); border-radius: 16px; margin-bottom: 24px; border: 1px solid #bfdbfe; }
+        .about-hero h1 { color: var(--blue); font-size: 32px; margin-bottom: 12px; }
+        .about-hero p { color: var(--muted); font-size: 15px; max-width: 600px; margin: 0 auto; }
+        
+        .section-card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .section-card h2 { font-size: 20px; color: var(--ink); margin-bottom: 20px; border-bottom: 2px solid var(--blue-soft); padding-bottom: 10px; }
+        
+        .member-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+        .member-card { background: var(--canvas); border: 1px solid var(--line); padding: 16px; border-radius: 12px; text-align: center; }
+        .member-card strong { display: block; font-size: 16px; color: var(--ink); margin-bottom: 4px; }
+        .member-card span { font-size: 13px; color: var(--blue); font-weight: 600; }
+        
+        .readme-content { font-size: 14px; color: var(--ink); line-height: 1.6; }
+        .readme-content h1 { font-size: 24px; color: var(--ink); margin-bottom: 16px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+        .readme-content h2 { font-size: 18px; color: var(--ink); margin-top: 24px; margin-bottom: 12px; }
+        .readme-content p { margin-bottom: 12px; text-align: justify; }
+        .readme-content ul { padding-left: 20px; margin-bottom: 16px; }
+        .readme-content ul li { margin-bottom: 8px; }
+        .readme-content b { color: var(--ink); }
+        
+        footer { 
+            text-align: center; 
+            padding: 20px; 
+            font-size: 13px; 
+            color: var(--muted); 
+            border-top: 1px solid var(--line); 
+            background: white; 
+            margin-top: auto; 
         }
     </style>
-    <script>
-        if (sessionStorage.getItem('isLoggedIn') === 'true') {
-            const role = sessionStorage.getItem('userRole');
-            if (role === 'Laboran') window.location.href = 'index-laboran.html';
-            else if (role === 'Kajur') window.location.href = 'index-kajur.html';
-            else window.location.href = 'index-siswa.html';
-        }
-    </script>
 </head>
-<body style="display:flex; flex-direction:column; min-height:100vh; background:var(--white);">
-    
-    <div id="loginScreen" style="display:flex; flex:1;">
-        <div class="login-left">
-            <div style="background:#fff; color:#2563eb; font-size:32px; font-weight:900; padding:20px; border-radius:16px; margin-bottom:24px;">IL</div>
-            <h1 style="font-size:36px; margin-bottom:16px;">InventraLab</h1>
-            <p style="font-size:16px; opacity:0.9; max-width:400px;">Sistem pendataan inventaris. Kelola perangkat dengan mudah dan pantau kondisinya secara real-time.</p>
-        </div>
-        
-        <div class="login-right">
-            <div class="login-box">
-                <div class="mobile-logo" style="display:none;">
-                    <div class="brand-logo" style="background:var(--blue); color:white; font-weight:900;">IL</div>
-                    <h1 style="font-size:24px; color:var(--ink);">InventraLab</h1>
-                </div>
+<body>
+    <div id="appScreen" style="display:flex; flex-direction:column; flex:1;">
+        <header class="topbar">
+            <div class="brand"><div class="brand-logo" style="background:var(--blue);">IL</div><div class="brand-text">InventraLab</div></div>
+            <div class="user-info" id="userInfoArea">
+                <!-- Diisi oleh JS -->
+            </div>
+        </header>
 
-                <h2 style="text-align:center;">Selamat Datang</h2>
-                <p style="text-align:center; margin-bottom:24px;">Silakan masuk untuk mengakses sistem.</p>
-                
-                <form id="formLogin" novalidate autocomplete="off">
-                    <div id="loginError" class="error-msg" style="display:none; color:var(--red); background:#fdeaea; padding:10px; border-radius:8px; margin-bottom:16px; font-size:13px; font-weight:bold; text-align:center;"></div>
-                    
-                    <div class="input-group">
-                        <label>Username</label>
-                        <input type="text" id="username" placeholder="Masukkan username" autocomplete="off">
-                    </div>
-                    <div class="input-group">
-                        <label>Password</label>
-                        <input type="password" id="password" placeholder="Masukkan password" autocomplete="new-password">
-                    </div>
-                    <button type="submit" class="btn-login">Masuk ke Sistem</button>
-                </form>
-                
-                <!-- TOMBOL TENTANG KAMI: DIPAKSA BIRU PENUH MENGGUNAKAN INLINE CSS -->
-                <div style="margin-top: 16px;">
-                    <a href="about.html" style="display: block; width: 100%; padding: 12px; text-align: center; border: none; color: white; background: #2563eb; border-radius: 8px; font-weight: 700; font-size: 14px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">Tentang Kami (About Us)</a>
-                </div>
+        <main style="flex:1; padding: 20px; max-width: 800px; margin: 0 auto; width: 100%; box-sizing: border-box;">
+            <div class="about-hero">
+                <h1>Tentang Kami</h1>
+                <p>Aplikasi InventraLab dibuat untuk memenuhi tugas proyek mata pelajaran Pemrograman Web Kelompok 6.</p>
+            </div>
 
-                <div class="demo-accounts">
-                    <p>Akun Demo:</p>
-                    <ul>
-                        <li><b>Siswa RPL</b> : siswarpl / rpl123</li>
-                        <li><b>Siswa DKV</b> : siswadkv / dkv123</li>
-                        <li><b>Kajur</b> : kepalajurusan / kajur123</li>
-                        <li><b>Laboran</b> : laboran / laboran123</li>
-                    </ul>
+            <div class="section-card">
+                <h2>Tim Pengembang (Kelompok 6)</h2>
+                <div class="member-grid">
+                    <div class="member-card"><strong>Renita Putri Lestari</strong><span>Pemilik Repository (Pemandu Diskusi)</span></div>
+                    <div class="member-card"><strong>Siham Tri Anggi</strong><span>Pencatat</span></div>
+                    <div class="member-card"><strong>Nimasayu Lintang Kosasih</strong><span>Penjaga Waktu</span></div>
+                    <div class="member-card"><strong>Ameliya Putri Cahyani</strong><span>Penanya Kritis</span></div>
+                    <div class="member-card"><strong>Elisa Febriani</strong><span>Juru Bicara</span></div>
+                    <div class="member-card"><strong>Faneza Dyra Efendy</strong><span>Pengembang Front-End</span></div>
                 </div>
             </div>
-        </div>
+
+            <div class="section-card">
+                <h2>Dokumentasi Proyek (README)</h2>
+                <div class="readme-content">
+                    
+                    <h1>Proyek Kelompok 6: Sistem Laporan Cepat Inventaris Lab</h1>
+
+                    <h2>1. Masalah yang Dipecahkan</h2>
+                    <p>Pencatatan inventaris dan laporan kerusakan perangkat komputer lab saat ini masih dilakukan secara manual. Hal ini sering luput, tidak terdata dengan rapi, dan menyulitkan saat pembuatan laporan di akhir semester.</p>
+
+                    <h2>2. Gagasan Solusi Kami</h2>
+                    <p>Kami membuat <b>Form Laporan Cepat via Google Form</b> yang terintegrasi langsung dengan <b>Dashboard / Rekap Otomatis (Google Sheets)</b>.</p>
+
+                    <h2>3. Siapa Penggunanya?</h2>
+                    <ul>
+                        <li><b>Siswa (RPL / DKV):</b> Sebagai pelapor jika menemukan kerusakan komputer.</li>
+                        <li><b>Laboran & Kepala Jurusan:</b> Sebagai pengelola data inventaris dan penerima laporan otomatis.</li>
+                    </ul>
+
+                    <h2>4. Apa yang Membuatnya Baru?</h2>
+                    <p>Siswa tidak perlu lagi melapor manual menggunakan kertas atau papan tulis. Laporan bisa diakses cepat via link/shortcut, dan data langsung terupdate secara <i>real-time</i> di dashboard.</p>
+
+                    <h2>5. Mengapa Gagasan Ini Dipilih?</h2>
+                    <p>Karena sangat realistis untuk diterapkan secara cepat, tidak membutuhkan biaya tambahan (hemat biaya), serta ramah pengguna (user-friendly) baik bagi siswa maupun pengelola lab.</p>
+
+                    <hr style="border: none; border-top: 1px solid var(--line); margin: 30px 0;">
+
+                    <h2>Aturan Curah Gagasan (Dokumentasi)</h2>
+                    <ul>
+                        <li><b>Target Ide:</b> Minimal 15–20 ide (fokus pada kuantitas dulu, kualitas belakangan).</li>
+                        <li><b>Aturan Penting:</b> Dilarang men-judge atau mengejek ide teman. Ide aneh tetap dicatat dan boleh ditambahkan/dikembangkan.</li>
+                        <li><b>Metode:</b> Sistem muter meja (1–2 menit per orang). Jika belum ada ide, boleh bilang "pass" dan menunggu putaran kedua.</li>
+                    </ul>
+
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            Copyright &copy; 2026 - Kelompok 6
+        </footer>
     </div>
 
-    <footer style="text-align:center; padding:20px; font-size:13px; color:var(--muted); border-top:1px solid var(--line);">
-        Copyright &copy; 2026 - Kelompok 6
-    </footer>
+    <nav class="nav-bar" id="navBar"></nav>
 
     <script>
-        const users = {
-            'siswarpl': { pass: 'rpl123', name: 'Siswa RPL', role: 'Siswa' },
-            'siswadkv': { pass: 'dkv123', name: 'Siswa DKV', role: 'Siswa' },
-            'laboran': { pass: 'laboran123', name: 'Laboran', role: 'Laboran' },
-            'kepalajurusan': { pass: 'kajur123', name: 'Kepala Jurusan', role: 'Kajur' }
-        };
+        const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+        const role = sessionStorage.getItem('userRole');
+        const navBar = document.getElementById('navBar');
+        const userInfoArea = document.getElementById('userInfoArea');
 
-        document.getElementById('formLogin').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const userIn = document.getElementById('username').value.toLowerCase().trim();
-            const passIn = document.getElementById('password').value;
-            const errorDiv = document.getElementById('loginError');
-            
-            if (!userIn || !passIn) {
-                errorDiv.innerText = "Username dan Password tidak boleh kosong!";
-                errorDiv.style.display = 'block';
-                return;
-            }
+        if (!isLoggedIn) {
+            // Tampilan jika BELUM LOGIN
+            userInfoArea.innerHTML = `<a href="index.html" class="btn-primary" style="padding:8px 16px; text-decoration:none; border-radius:8px; font-weight:bold; font-size:14px; width:auto;">Login</a>`;
+            navBar.innerHTML = `
+                <a href="index.html">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+                    <span>Login</span>
+                </a>
+                <a href="about.html" class="active">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>Tentang</span>
+                </a>
+            `;
+        } else {
+            // Tampilan jika SUDAH LOGIN
+            userInfoArea.innerHTML = `
+                <div class="user-details"><strong>${sessionStorage.getItem('userName')}</strong><span>${role}</span></div>
+                <button onclick="sessionStorage.clear(); window.location.href='index.html';" class="btn-logout" title="Keluar">
+                    <svg style="width:18px; height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                </button>
+            `;
 
-            if (users[userIn] && users[userIn].pass === passIn) {
-                errorDiv.style.display = 'none';
-                sessionStorage.setItem('isLoggedIn', 'true');
-                sessionStorage.setItem('userName', users[userIn].name);
-                sessionStorage.setItem('userRole', users[userIn].role);
-                
-                if (users[userIn].role === 'Laboran') window.location.href = 'index-laboran.html';
-                else if (users[userIn].role === 'Kajur') window.location.href = 'index-kajur.html';
-                else window.location.href = 'index-siswa.html';
+            let navHtml = '';
+            if (role === 'Laboran') {
+                navHtml = `
+                    <a href="index-laboran.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg><span>Beranda</span></a>
+                    <a href="kelola-laboran.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Kelola</span></a>
+                    <a href="dashboard-laboran.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg><span>Dasbor</span></a>
+                    <a href="about.html" class="active"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Tentang</span></a>
+                `;
+            } else if (role === 'Kajur') {
+                navHtml = `
+                    <a href="index-kajur.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg><span>Beranda</span></a>
+                    <a href="riwayat-kajur.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg><span>Laporan</span></a>
+                    <a href="about.html" class="active"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Tentang</span></a>
+                `;
             } else {
-                errorDiv.innerText = "Username atau password salah!";
-                errorDiv.style.display = 'block';
+                navHtml = `
+                    <a href="index-siswa.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg><span>Beranda</span></a>
+                    <a href="dashboard-siswa.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg><span>Dasbor</span></a>
+                    <a href="laporan-siswa.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg><span>Laporan</span></a>
+                    <a href="about.html" class="active"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Tentang</span></a>
+                `;
             }
-        });
+            navBar.innerHTML = navHtml;
+        }
     </script>
 </body>
 </html>
