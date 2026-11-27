@@ -3,109 +3,145 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>InventraLab - Tentang & Kontak</title>
+    <title>InventraLab - Tentang Kami (Kelompok 6)</title>
     <link rel="stylesheet" href="style.css">
     <style>
         body { display: flex; flex-direction: column; min-height: 100vh; margin: 0; background: var(--canvas); }
+        .container { max-width: 900px; margin: 30px auto; width: 90%; }
         
-        /* Container Utama */
-        .container { max-width: 800px; margin: 30px auto; width: 90%; }
-        
-        /* Card Info Aplikasi */
-        .info-card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); text-align: center; }
-        .info-card h2 { font-size: 22px; color: var(--blue); margin-bottom: 12px; }
-        .info-card p { font-size: 14px; color: var(--ink); line-height: 1.6; max-width: 600px; margin: 0 auto; }
-        
-        /* Grid Kontak */
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
-        
-        .contact-card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 24px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .contact-card h3 { font-size: 18px; color: var(--ink); margin-bottom: 4px; }
-        .contact-card .role { font-size: 13px; color: var(--blue); font-weight: 600; margin-bottom: 16px; display: block; }
-        .contact-card p { font-size: 14px; color: var(--muted); margin-bottom: 8px; }
-        
-        footer { text-align: center; padding: 20px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); background: white; margin-top: auto; }
+        /* Card Utama */
+        .about-card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 32px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 24px; }
+        .about-card h1 { font-size: 28px; color: var(--blue); margin-bottom: 8px; text-align: center; }
+        .about-card > p.subtitle { color: var(--muted); font-size: 14px; margin-bottom: 32px; text-align: center; }
 
-        /* Tambahan CSS untuk Tombol Kembali ke Login */
-        .btn-kembali { display: inline-block; margin-top: 20px; padding: 10px 20px; background: var(--blue); color: white; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 14px; transition: 0.2s; }
+        /* Section Style */
+        .section-block { margin-bottom: 32px; }
+        .section-block h2 { font-size: 20px; color: var(--ink); margin-bottom: 12px; border-bottom: 2px solid var(--blue-soft); padding-bottom: 8px; display: inline-block; }
+        .section-block p, .section-block li { font-size: 14px; color: var(--ink); line-height: 1.6; margin-bottom: 8px; }
+        .section-block ul { padding-left: 20px; }
+        .section-block li { margin-bottom: 6px; }
+
+        /* Grid Anggota */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 16px; }
+        .member-card { background: var(--canvas); border: 1px solid var(--line); border-radius: 12px; padding: 20px; text-align: center; }
+        .member-avatar { width: 60px; height: 60px; background: var(--blue-soft); color: var(--blue); font-size: 24px; font-weight: bold; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px auto; }
+        .member-card h3 { font-size: 16px; color: var(--ink); margin-bottom: 4px; }
+        .member-card .role { font-size: 12px; color: var(--blue); font-weight: 600; background: var(--white); padding: 4px 10px; border-radius: 99px; display: inline-block; margin-top: 4px; }
+        .member-card p { font-size: 13px; color: var(--muted); margin-top: 8px; line-height: 1.4; }
+
+        .btn-kembali { display: inline-block; margin-top: 16px; padding: 12px 24px; background: var(--blue); color: white; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 14px; transition: 0.2s; text-align: center; width: 100%; box-sizing: border-box; }
         .btn-kembali:hover { background: var(--blue-hover); }
     </style>
-    
-    <!-- KODE PENGECEKAN LOGIN SUDAH DIHAPUS DARI SINI -->
-    <!-- Sehingga halaman ini bisa diakses dari mana saja, termasuk sebelum login -->
-    
 </head>
 <body>
     <div id="appScreen" style="display:flex; flex-direction:column; flex:1;">
         <!-- HEADER ATAS -->
         <header class="topbar">
             <div class="brand"><div class="brand-logo" style="background:var(--blue);">IL</div><div class="brand-text">InventraLab</div></div>
-            <div class="user-info" id="userInfoArea"></div>
         </header>
 
         <main style="flex:1; padding: 20px;">
             <div class="container">
                 
-                <!-- Info Aplikasi -->
-                <div class="info-card">
-                    <h2>Tentang Aplikasi</h2>
-                    <p><b>InventraLab</b> adalah Sistem Laporan Cepat Inventaris Laboratorium. Aplikasi ini memudahkan siswa melaporkan kerusakan perangkat secara <i>real-time</i>, serta membantu Laboran dan Kepala Jurusan dalam mengelola data perbaikan secara terpusat.</p>
-                    
-                    <!-- Tombol pintas kembali ke login untuk pengunjung yang belum masuk -->
-                    <div style="margin-top: 24px;">
-                        <a href="index.html" class="btn-kembali">Kembali ke Login</a>
+                <!-- Card 1: Informasi Proyek -->
+                <div class="about-card">
+                    <h1>Tentang InventraLab</h1>
+                    <p class="subtitle">Proyek Kelompok 6: Sistem Laporan Cepat Inventaris Lab</p>
+
+                    <div class="section-block">
+                        <h2>1. Masalah yang Dipecahkan</h2>
+                        <p>Pencatatan inventaris dan laporan kerusakan perangkat komputer lab saat ini masih dilakukan secara manual. Hal ini sering luput, tidak terdata dengan rapi, dan menyulitkan saat pembuatan laporan di akhir semester.</p>
+                    </div>
+
+                    <div class="section-block">
+                        <h2>2. Gagasan Solusi Kami</h2>
+                        <p>Kami membuat <b>Sistem Laporan Cepat Inventaris Lab</b> berbasis web yang terintegrasi langsung dengan <b>Dashboard / Rekap Otomatis</b>. Data yang dilaporkan akan langsung masuk dan tersusun rapi.</p>
+                    </div>
+
+                    <div class="section-block">
+                        <h2>3. Siapa Penggunanya?</h2>
+                        <ul>
+                            <li><b>Siswa (RPL / DKV):</b> Sebagai pelapor jika menemukan kerusakan komputer.</li>
+                            <li><b>Laboran & Kepala Jurusan:</b> Sebagai pengelola data inventaris dan penerima laporan otomatis.</li>
+                        </ul>
+                    </div>
+
+                    <div class="section-block">
+                        <h2>4. Apa yang Membuatnya Baru?</h2>
+                        <p>Siswa tidak perlu lagi melapor manual menggunakan kertas atau papan tulis. Laporan bisa diakses cepat via link/shortcut, dan data langsung terupdate secara <i>real-time</i> di dashboard.</p>
+                    </div>
+
+                    <div class="section-block">
+                        <h2>5. Mengapa Gagasan Ini Dipilih?</h2>
+                        <p>Karena sangat realistis untuk diterapkan secara cepat, tidak membutuhkan biaya tambahan (hemat biaya), serta ramah pengguna (<i>user-friendly</i>) baik bagi siswa maupun pengelola lab.</p>
                     </div>
                 </div>
 
-                <!-- Kontak Pengelola -->
-                <h2 style="font-size: 18px; color: var(--ink); margin-bottom: 16px; text-align: center;">Informasi & Kontak Pengelola Lab</h2>
-                <div class="contact-grid">
+                <!-- Card 2: Profil Kelompok -->
+                <div class="about-card">
+                    <h1>Tim Pengembang (Kelompok 6)</h1>
+                    <p class="subtitle">Anggota dan pembagian tugas dalam pembuatan proyek ini.</p>
                     
-                    <!-- Kontak Laboran -->
-                    <div class="contact-card">
-                        <h3>Bapak Laboran</h3>
-                        <span class="role">Pengelola Laboratorium</span>
-                        <p>Telp: 0812-3456-7890</p>
-                        <p>Email: laboran@sekolah.sch.id</p>
-                        <a href="https://wa.me/6281234567890" target="_blank" style="display:inline-block; background:#25D366; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; font-size:14px; font-weight:bold; margin-top:12px;">Chat via WA</a>
-                    </div>
+                    <div class="team-grid">
+                        <!-- 1. Pemandu Diskusi -->
+                        <div class="member-card">
+                            <div class="member-avatar">R</div>
+                            <h3>Renita Putri Lestari</h3>
+                            <span class="role">Pemandu Diskusi</span>
+                            <p>Membuat repo dari template, mengundang anggota, memastikan semua halaman masuk.</p>
+                        </div>
 
-                    <!-- Kontak Kajur -->
-                    <div class="contact-card">
-                        <h3>Ibu Kepala Jurusan</h3>
-                        <span class="role">Pimpinan Jurusan</span>
-                        <p>Telp: 0898-7654-3210</p>
-                        <p>Email: kajur@sekolah.sch.id</p>
-                        <a href="https://wa.me/6289876543210" target="_blank" style="display:inline-block; background:#25D366; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; font-size:14px; font-weight:bold; margin-top:12px;">Chat via WA</a>
-                    </div>
+                        <!-- 2. Pencatat -->
+                        <div class="member-card">
+                            <div class="member-avatar">S</div>
+                            <h3>Siham Tri Anggi</h3>
+                            <span class="role">Pencatat</span>
+                            <p>Menyalin Kanvas Konsep Produk ke file README.md.</p>
+                        </div>
 
+                        <!-- 3. Penjaga Waktu -->
+                        <div class="member-card">
+                            <div class="member-avatar">N</div>
+                            <h3>Nimasayu Lintang Kosasih</h3>
+                            <span class="role">Penjaga Waktu</span>
+                            <p>Membuat Issues (satu tugas per halaman) dan memantau semuanya tertutup.</p>
+                        </div>
+
+                        <!-- 4. Penanya Kritis -->
+                        <div class="member-card">
+                            <div class="member-avatar">A</div>
+                            <h3>Ameliya Putri Cahyani</h3>
+                            <span class="role">Penanya Kritis</span>
+                            <p>Memberi komentar "Bagaimana jika ...?" pada commit teman, mencocokkan dengan kanvas.</p>
+                        </div>
+
+                        <!-- 5. Juru Bicara -->
+                        <div class="member-card">
+                            <div class="member-avatar">E</div>
+                            <h3>Elisa Febriani</h3>
+                            <span class="role">Juru Bicara</span>
+                            <p>Menulis tanggapan di repository kelompok peninjau dan menyampaikan konsep kelompok.</p>
+                        </div>
+
+                        <!-- 6. Pengembang Front-End -->
+                        <div class="member-card">
+                            <div class="member-avatar">F</div>
+                            <h3>Faneza Dyra Efendy</h3>
+                            <span class="role">Pengembang Front-End</span>
+                            <p>Mengurus index.html dan style.css, menyalakan GitHub Pages, membantu teman yang macet.</p>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Tombol Kembali -->
+                <div style="max-width: 300px; margin: 0 auto;">
+                    <a href="index.html" class="btn-kembali">Kembali ke Login</a>
+                </div>
+
             </div>
         </main>
         
-        <footer>Copyright &copy; 2026 - Kelompok 6</footer>
+        <footer style="text-align:center; padding:20px; font-size:13px; color:var(--muted); border-top:1px solid var(--line); background:white;">Copyright &copy; 2026 - Kelompok 6</footer>
     </div>
-
-    <script>
-        // Cek apakah user sudah login
-        const userName = sessionStorage.getItem('userName');
-        const role = sessionStorage.getItem('userRole');
-        const userInfoArea = document.getElementById('userInfoArea');
-
-        // Jika sudah login, tampilkan profil dan tombol logout
-        if (userName && role) {
-            userInfoArea.innerHTML = `
-                <div class="user-details"><strong>${userName}</strong><span>${role}</span></div>
-                <button onclick="sessionStorage.clear(); window.location.href='index.html';" class="btn-logout" title="Keluar">
-                    <svg style="width:18px; height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                </button>
-            `;
-        } else {
-            // Jika belum login (pengunjung biasa), kosongkan area profil
-            // (Tombol "Kembali ke Login" sudah ada di dalam card atas)
-            userInfoArea.innerHTML = '';
-        }
-    </script>
 </body>
 </html>
