@@ -26,13 +26,15 @@
         .contact-card p { font-size: 14px; color: var(--muted); margin-bottom: 8px; }
         
         footer { text-align: center; padding: 20px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); background: white; margin-top: auto; }
+
+        /* Tambahan CSS untuk Tombol Kembali ke Login */
+        .btn-kembali { display: inline-block; margin-top: 20px; padding: 10px 20px; background: var(--blue); color: white; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 14px; transition: 0.2s; }
+        .btn-kembali:hover { background: var(--blue-hover); }
     </style>
-    <script>
-        // Cek Login
-        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
-            window.location.href = 'index.html';
-        }
-    </script>
+    
+    <!-- KODE PENGECEKAN LOGIN SUDAH DIHAPUS DARI SINI -->
+    <!-- Sehingga halaman ini bisa diakses dari mana saja, termasuk sebelum login -->
+    
 </head>
 <body>
     <div id="appScreen" style="display:flex; flex-direction:column; flex:1;">
@@ -49,6 +51,11 @@
                 <div class="info-card">
                     <h2>Tentang Aplikasi</h2>
                     <p><b>InventraLab</b> adalah Sistem Laporan Cepat Inventaris Laboratorium. Aplikasi ini memudahkan siswa melaporkan kerusakan perangkat secara <i>real-time</i>, serta membantu Laboran dan Kepala Jurusan dalam mengelola data perbaikan secara terpusat.</p>
+                    
+                    <!-- Tombol pintas kembali ke login untuk pengunjung yang belum masuk -->
+                    <div style="margin-top: 24px;">
+                        <a href="index.html" class="btn-kembali">Kembali ke Login</a>
+                    </div>
                 </div>
 
                 <!-- Kontak Pengelola -->
@@ -81,17 +88,24 @@
     </div>
 
     <script>
+        // Cek apakah user sudah login
         const userName = sessionStorage.getItem('userName');
         const role = sessionStorage.getItem('userRole');
         const userInfoArea = document.getElementById('userInfoArea');
 
-        // Render Tombol Logout
-        userInfoArea.innerHTML = `
-            <div class="user-details"><strong>${userName}</strong><span>${role}</span></div>
-            <button onclick="sessionStorage.clear(); window.location.href='index.html';" class="btn-logout" title="Keluar">
-                <svg style="width:18px; height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-            </button>
-        `;
+        // Jika sudah login, tampilkan profil dan tombol logout
+        if (userName && role) {
+            userInfoArea.innerHTML = `
+                <div class="user-details"><strong>${userName}</strong><span>${role}</span></div>
+                <button onclick="sessionStorage.clear(); window.location.href='index.html';" class="btn-logout" title="Keluar">
+                    <svg style="width:18px; height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                </button>
+            `;
+        } else {
+            // Jika belum login (pengunjung biasa), kosongkan area profil
+            // (Tombol "Kembali ke Login" sudah ada di dalam card atas)
+            userInfoArea.innerHTML = '';
+        }
     </script>
 </body>
 </html>
