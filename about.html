@@ -3,172 +3,95 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>InventraLab - Tentang Kami</title>
+    <title>InventraLab - Tentang & Kontak</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        body { 
-            display: flex; 
-            flex-direction: column; 
-            min-height: 100vh; 
-            margin: 0;
-            padding-bottom: 90px; 
-            box-sizing: border-box;
-        }
+        body { display: flex; flex-direction: column; min-height: 100vh; margin: 0; background: var(--canvas); }
         
-        .about-hero { text-align: center; padding: 40px 20px; background: var(--blue-soft); border-radius: 16px; margin-bottom: 24px; border: 1px solid #bfdbfe; }
-        .about-hero h1 { color: var(--blue); font-size: 32px; margin-bottom: 12px; }
-        .about-hero p { color: var(--muted); font-size: 15px; max-width: 600px; margin: 0 auto; }
+        /* Container Utama */
+        .container { max-width: 800px; margin: 30px auto; width: 90%; }
         
-        .section-card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .section-card h2 { font-size: 20px; color: var(--ink); margin-bottom: 20px; border-bottom: 2px solid var(--blue-soft); padding-bottom: 10px; }
+        /* Card Info Aplikasi */
+        .info-card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); text-align: center; }
+        .info-card h2 { font-size: 22px; color: var(--blue); margin-bottom: 12px; }
+        .info-card p { font-size: 14px; color: var(--ink); line-height: 1.6; max-width: 600px; margin: 0 auto; }
         
-        .member-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-        .member-card { background: var(--canvas); border: 1px solid var(--line); padding: 16px; border-radius: 12px; text-align: center; }
-        .member-card strong { display: block; font-size: 16px; color: var(--ink); margin-bottom: 4px; }
-        .member-card span { font-size: 13px; color: var(--blue); font-weight: 600; }
+        /* Grid Kontak */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
         
-        .readme-content { font-size: 14px; color: var(--ink); line-height: 1.6; }
-        .readme-content h1 { font-size: 24px; color: var(--ink); margin-bottom: 16px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
-        .readme-content h2 { font-size: 18px; color: var(--ink); margin-top: 24px; margin-bottom: 12px; }
-        .readme-content p { margin-bottom: 12px; text-align: justify; }
-        .readme-content ul { padding-left: 20px; margin-bottom: 16px; }
-        .readme-content ul li { margin-bottom: 8px; }
-        .readme-content b { color: var(--ink); }
+        .contact-card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 24px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .contact-card h3 { font-size: 18px; color: var(--ink); margin-bottom: 4px; }
+        .contact-card .role { font-size: 13px; color: var(--blue); font-weight: 600; margin-bottom: 16px; display: block; }
+        .contact-card p { font-size: 14px; color: var(--muted); margin-bottom: 8px; }
         
-        footer { 
-            text-align: center; 
-            padding: 20px; 
-            font-size: 13px; 
-            color: var(--muted); 
-            border-top: 1px solid var(--line); 
-            background: white; 
-            margin-top: auto; 
-        }
+        footer { text-align: center; padding: 20px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); background: white; margin-top: auto; }
     </style>
+    <script>
+        // Cek Login
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
 </head>
 <body>
     <div id="appScreen" style="display:flex; flex-direction:column; flex:1;">
+        <!-- HEADER ATAS -->
         <header class="topbar">
             <div class="brand"><div class="brand-logo" style="background:var(--blue);">IL</div><div class="brand-text">InventraLab</div></div>
-            <div class="user-info" id="userInfoArea">
-                <!-- Diisi oleh JS -->
-            </div>
+            <div class="user-info" id="userInfoArea"></div>
         </header>
 
-        <main style="flex:1; padding: 20px; max-width: 800px; margin: 0 auto; width: 100%; box-sizing: border-box;">
-            <div class="about-hero">
-                <h1>Tentang Kami</h1>
-                <p>Aplikasi InventraLab dibuat untuk memenuhi tugas proyek mata pelajaran Pemrograman Web Kelompok 6.</p>
-            </div>
-
-            <div class="section-card">
-                <h2>Tim Pengembang (Kelompok 6)</h2>
-                <div class="member-grid">
-                    <div class="member-card"><strong>Renita Putri Lestari</strong><span>Pemilik Repository (Pemandu Diskusi)</span></div>
-                    <div class="member-card"><strong>Siham Tri Anggi</strong><span>Pencatat</span></div>
-                    <div class="member-card"><strong>Nimasayu Lintang Kosasih</strong><span>Penjaga Waktu</span></div>
-                    <div class="member-card"><strong>Ameliya Putri Cahyani</strong><span>Penanya Kritis</span></div>
-                    <div class="member-card"><strong>Elisa Febriani</strong><span>Juru Bicara</span></div>
-                    <div class="member-card"><strong>Faneza Dyra Efendy</strong><span>Pengembang Front-End</span></div>
+        <main style="flex:1; padding: 20px;">
+            <div class="container">
+                
+                <!-- Info Aplikasi -->
+                <div class="info-card">
+                    <h2>Tentang Aplikasi</h2>
+                    <p><b>InventraLab</b> adalah Sistem Laporan Cepat Inventaris Laboratorium. Aplikasi ini memudahkan siswa melaporkan kerusakan perangkat secara <i>real-time</i>, serta membantu Laboran dan Kepala Jurusan dalam mengelola data perbaikan secara terpusat.</p>
                 </div>
-            </div>
 
-            <div class="section-card">
-                <h2>Dokumentasi Proyek (README)</h2>
-                <div class="readme-content">
+                <!-- Kontak Pengelola -->
+                <h2 style="font-size: 18px; color: var(--ink); margin-bottom: 16px; text-align: center;">Informasi & Kontak Pengelola Lab</h2>
+                <div class="contact-grid">
                     
-                    <h1>Proyek Kelompok 6: Sistem Laporan Cepat Inventaris Lab</h1>
+                    <!-- Kontak Laboran -->
+                    <div class="contact-card">
+                        <h3>Bapak Laboran</h3>
+                        <span class="role">Pengelola Laboratorium</span>
+                        <p>Telp: 0812-3456-7890</p>
+                        <p>Email: laboran@sekolah.sch.id</p>
+                        <a href="https://wa.me/6281234567890" target="_blank" style="display:inline-block; background:#25D366; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; font-size:14px; font-weight:bold; margin-top:12px;">Chat via WA</a>
+                    </div>
 
-                    <h2>1. Masalah yang Dipecahkan</h2>
-                    <p>Pencatatan inventaris dan laporan kerusakan perangkat komputer lab saat ini masih dilakukan secara manual. Hal ini sering luput, tidak terdata dengan rapi, dan menyulitkan saat pembuatan laporan di akhir semester.</p>
-
-                    <h2>2. Gagasan Solusi Kami</h2>
-                    <p>Kami membuat <b>Form Laporan Cepat via Google Form</b> yang terintegrasi langsung dengan <b>Dashboard / Rekap Otomatis (Google Sheets)</b>.</p>
-
-                    <h2>3. Siapa Penggunanya?</h2>
-                    <ul>
-                        <li><b>Siswa (RPL / DKV):</b> Sebagai pelapor jika menemukan kerusakan komputer.</li>
-                        <li><b>Laboran & Kepala Jurusan:</b> Sebagai pengelola data inventaris dan penerima laporan otomatis.</li>
-                    </ul>
-
-                    <h2>4. Apa yang Membuatnya Baru?</h2>
-                    <p>Siswa tidak perlu lagi melapor manual menggunakan kertas atau papan tulis. Laporan bisa diakses cepat via link/shortcut, dan data langsung terupdate secara <i>real-time</i> di dashboard.</p>
-
-                    <h2>5. Mengapa Gagasan Ini Dipilih?</h2>
-                    <p>Karena sangat realistis untuk diterapkan secara cepat, tidak membutuhkan biaya tambahan (hemat biaya), serta ramah pengguna (user-friendly) baik bagi siswa maupun pengelola lab.</p>
-
-                    <hr style="border: none; border-top: 1px solid var(--line); margin: 30px 0;">
-
-                    <h2>Aturan Curah Gagasan (Dokumentasi)</h2>
-                    <ul>
-                        <li><b>Target Ide:</b> Minimal 15–20 ide (fokus pada kuantitas dulu, kualitas belakangan).</li>
-                        <li><b>Aturan Penting:</b> Dilarang men-judge atau mengejek ide teman. Ide aneh tetap dicatat dan boleh ditambahkan/dikembangkan.</li>
-                        <li><b>Metode:</b> Sistem muter meja (1–2 menit per orang). Jika belum ada ide, boleh bilang "pass" dan menunggu putaran kedua.</li>
-                    </ul>
+                    <!-- Kontak Kajur -->
+                    <div class="contact-card">
+                        <h3>Ibu Kepala Jurusan</h3>
+                        <span class="role">Pimpinan Jurusan</span>
+                        <p>Telp: 0898-7654-3210</p>
+                        <p>Email: kajur@sekolah.sch.id</p>
+                        <a href="https://wa.me/6289876543210" target="_blank" style="display:inline-block; background:#25D366; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; font-size:14px; font-weight:bold; margin-top:12px;">Chat via WA</a>
+                    </div>
 
                 </div>
             </div>
         </main>
         
-        <footer>
-            Copyright &copy; 2026 - Kelompok 6
-        </footer>
+        <footer>Copyright &copy; 2026 - Kelompok 6</footer>
     </div>
 
-    <nav class="nav-bar" id="navBar"></nav>
-
     <script>
-        const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+        const userName = sessionStorage.getItem('userName');
         const role = sessionStorage.getItem('userRole');
-        const navBar = document.getElementById('navBar');
         const userInfoArea = document.getElementById('userInfoArea');
 
-        if (!isLoggedIn) {
-            // Tampilan jika BELUM LOGIN
-            userInfoArea.innerHTML = `<a href="index.html" class="btn-primary" style="padding:8px 16px; text-decoration:none; border-radius:8px; font-weight:bold; font-size:14px; width:auto;">Login</a>`;
-            navBar.innerHTML = `
-                <a href="index.html">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
-                    <span>Login</span>
-                </a>
-                <a href="about.html" class="active">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    <span>Tentang</span>
-                </a>
-            `;
-        } else {
-            // Tampilan jika SUDAH LOGIN
-            userInfoArea.innerHTML = `
-                <div class="user-details"><strong>${sessionStorage.getItem('userName')}</strong><span>${role}</span></div>
-                <button onclick="sessionStorage.clear(); window.location.href='index.html';" class="btn-logout" title="Keluar">
-                    <svg style="width:18px; height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                </button>
-            `;
-
-            let navHtml = '';
-            if (role === 'Laboran') {
-                navHtml = `
-                    <a href="index-laboran.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg><span>Beranda</span></a>
-                    <a href="kelola-laboran.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Kelola</span></a>
-                    <a href="dashboard-laboran.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg><span>Dasbor</span></a>
-                    <a href="about.html" class="active"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Tentang</span></a>
-                `;
-            } else if (role === 'Kajur') {
-                navHtml = `
-                    <a href="index-kajur.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg><span>Beranda</span></a>
-                    <a href="riwayat-kajur.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg><span>Laporan</span></a>
-                    <a href="about.html" class="active"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Tentang</span></a>
-                `;
-            } else {
-                navHtml = `
-                    <a href="index-siswa.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg><span>Beranda</span></a>
-                    <a href="dashboard-siswa.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg><span>Dasbor</span></a>
-                    <a href="laporan-siswa.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg><span>Laporan</span></a>
-                    <a href="about.html" class="active"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Tentang</span></a>
-                `;
-            }
-            navBar.innerHTML = navHtml;
-        }
+        // Render Tombol Logout
+        userInfoArea.innerHTML = `
+            <div class="user-details"><strong>${userName}</strong><span>${role}</span></div>
+            <button onclick="sessionStorage.clear(); window.location.href='index.html';" class="btn-logout" title="Keluar">
+                <svg style="width:18px; height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+            </button>
+        `;
     </script>
 </body>
 </html>
