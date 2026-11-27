@@ -16,9 +16,12 @@
         .member-card strong { display: block; font-size: 16px; color: var(--ink); margin-bottom: 4px; }
         .member-card span { font-size: 13px; color: var(--blue); font-weight: 600; }
         .readme-content { font-size: 14px; color: var(--ink); line-height: 1.6; }
-        .readme-content h3 { font-size: 16px; color: var(--blue); margin-top: 16px; margin-bottom: 8px; }
+        .readme-content h3 { font-size: 16px; color: var(--blue); margin-top: 20px; margin-bottom: 8px; }
         .readme-content h3:first-child { margin-top: 0; }
+        .readme-content p { margin-bottom: 12px; }
         .readme-content ul { padding-left: 20px; margin-bottom: 12px; }
+        .readme-content ul li { margin-bottom: 6px; }
+        .readme-content b { color: var(--ink); }
     </style>
 </head>
 <body style="display:flex; flex-direction:column; min-height:100vh; padding-bottom: 80px;">
@@ -33,7 +36,7 @@
         <main style="flex:1;">
             <div class="about-hero">
                 <h1>Tentang Kami</h1>
-                <p>Aplikasi InventraLab dibuat untuk memenuhi tugas proyek mata pelajaran Pemrograman Web Kelompok 6.</p>
+                <p>Aplikasi InventraLab dibuat untuk memenuhi tugas proyek mata pelajaran Pemrograman Web Kelompok 6 — Sistem Laporan Cepat Inventaris Lab.</p>
             </div>
 
             <div class="section-card">
@@ -52,14 +55,42 @@
                 <h2>Dokumentasi Proyek (README)</h2>
                 <div class="readme-content">
                     <h3>📌 Deskripsi Singkat</h3>
-                    <p>InventraLab adalah Sistem Pendataan Inventaris Laboratorium Komputer berbasis Web. Aplikasi ini mempermudah siswa dalam melaporkan kerusakan perangkat, dan membantu Laboran dalam mengelola serta memverifikasi status perbaikan secara terpusat.</p>
+                    <p><b>InventraLab</b> adalah Sistem Laporan Cepat Inventaris Laboratorium Komputer berbasis Web. Aplikasi ini dibuat untuk mengatasi masalah pencatatan inventaris dan laporan kerusakan perangkat komputer lab yang selama ini masih dilakukan secara manual — sering luput, tidak terdata dengan rapi, dan menyulitkan saat pembuatan laporan di akhir semester.</p>
+                    <p>Melalui InventraLab, siswa dapat melaporkan kerusakan perangkat secara cepat melalui form digital, sementara Laboran dan Kepala Jurusan menerima data secara otomatis dalam bentuk dashboard/rekap terintegrasi.</p>
+
+                    <h3>🎯 Masalah yang Dipecahkan</h3>
+                    <ul>
+                        <li>Pencatatan inventaris dan laporan kerusakan perangkat masih dilakukan secara <b>manual</b> (kertas/papan tulis).</li>
+                        <li>Laporan sering <b>luput</b> dan tidak terdokumentasi dengan baik.</li>
+                        <li>Data <b>tidak terdata rapi</b> sehingga menyulitkan pembuatan laporan akhir semester.</li>
+                    </ul>
+
+                    <h3>💡 Gagasan Solusi</h3>
+                    <p>Kami membuat <b>Form Laporan Cepat</b> yang terintegrasi langsung dengan <b>Dashboard/Rekap Otomatis</b>. Siswa tidak perlu lagi melapor manual menggunakan kertas atau papan tulis — laporan dapat diakses cepat via link/shortcut (QR Code di setiap meja lab), dan data langsung tercatat otomatis ke dalam sistem.</p>
+
+                    <h3>👥 Pengguna Sistem</h3>
+                    <ul>
+                        <li><b>Siswa (RPL/DKV):</b> Sebagai pelapor jika menemukan kerusakan komputer.</li>
+                        <li><b>Laboran:</b> Sebagai pengelola data inventaris dan penerima laporan otomatis.</li>
+                        <li><b>Kepala Jurusan:</b> Sebagai penerima laporan otomatis dan pengambil keputusan.</li>
+                    </ul>
+
                     <h3>🚀 Fitur Utama</h3>
                     <ul>
                         <li><b>Multi-Role Login:</b> Sistem memiliki 3 hak akses berbeda (Siswa, Laboran, Kepala Jurusan).</li>
-                        <li><b>Pelaporan Perangkat:</b> Siswa dapat membuat laporan kerusakan perangkat dengan detail kondisi.</li>
+                        <li><b>Pelaporan Perangkat Cepat:</b> Siswa dapat membuat laporan kerusakan perangkat dengan detail kondisi secara digital.</li>
                         <li><b>Verifikasi Laboran:</b> Laboran dapat mengubah status laporan dari "Menunggu" menjadi "Selesai".</li>
                         <li><b>Notifikasi Siswa:</b> Siswa mendapat notifikasi otomatis di beranda jika laporannya telah diperbaiki.</li>
                         <li><b>Dasbor Pimpinan:</b> Kepala Jurusan dapat memantau seluruh rekapitulasi laporan secara keseluruhan.</li>
+                        <li><b>Rekap Otomatis:</b> Data laporan tersusun rapi dan siap digunakan untuk laporan akhir semester.</li>
+                    </ul>
+
+                    <h3>✨ Apa yang Membuatnya Baru?</h3>
+                    <ul>
+                        <li>Siswa tidak perlu lagi melapor manual menggunakan kertas atau papan tulis.</li>
+                        <li>Laporan bisa diakses cepat via link/shortcut atau QR Code.</li>
+                        <li>Data langsung tercatat otomatis dan terintegrasi dengan dashboard rekap.</li>
+                        <li>Tanpa biaya tambahan — memanfaatkan ekosistem yang sudah ada.</li>
                     </ul>
                 </div>
             </div>
